@@ -1,5 +1,7 @@
 package com.image;
 
+import edu.umd.lib.hadoop.io.ImageWritable;
+import edu.umd.lib.hadoop.mapreduce.lib.input.ImageInputFormat;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -32,7 +34,7 @@ public class SameImage extends Configured implements Tool {
         // Initialize and configure MapReduce job
         Job job = Job.getInstance();
         // Set input format class which parses the input HIB and spawns map tasks
-        job.setInputFormatClass(HibInputFormat.class);
+        job.setInputFormatClass(ImageInputFormat.class);
         // Set the driver, mapper, and reducer classes which express the computation
         job.setJarByClass(SameImage.class);
         job.setMapperClass(ImageMapper.class);
@@ -54,7 +56,7 @@ public class SameImage extends Configured implements Tool {
         return success ? 0 : 1;
     }
 
-    public static class ImageMapper extends Mapper<HipiImageHeader, FloatImage, IntWritable, FloatImage>{
+    public static class ImageMapper extends Mapper<Text, ImageWritable, IntWritable, FloatImage>{
 
         public void map(HipiImageHeader key, FloatImage value, Context context) throws IOException, InterruptedException {
         // Verify that image was properly decoded, is of sufficient size, and has three color channels (RGB)

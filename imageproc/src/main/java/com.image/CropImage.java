@@ -86,7 +86,7 @@ public class CropImage extends Configured implements Tool {
 
                         String cord = String.format("%3d,%3d,",i,j);
                         //write image as it is
-                        xyl = 255 * valData[(j*w+i)];
+                        xyl = valData[(j*w+i)];
                         intensity[0] = xyl;// xyl;
                         intensity[1] = xyl;//calculateConnectedValue(xyl, seedIntensity);
                         extractedImage = new FloatImage(1, 1, 2, intensity);
