@@ -1,4 +1,4 @@
-package com.image;
+package old;
 
 import edu.umd.lib.hadoop.io.ImageWritable;
 import edu.umd.lib.hadoop.mapreduce.lib.input.ImageInputFormat;
@@ -15,7 +15,6 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.hipi.image.FloatImage;
 import org.hipi.image.HipiImageHeader;
-import org.hipi.imagebundle.mapreduce.HibInputFormat;
 
 import java.io.IOException;
 

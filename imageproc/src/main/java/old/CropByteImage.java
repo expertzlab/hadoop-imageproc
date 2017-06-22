@@ -1,5 +1,7 @@
-package com.image;
+package old;
 
+import edu.umd.lib.hadoop.io.ImageWritable;
+import edu.umd.lib.hadoop.mapreduce.lib.input.ImageInputFormat;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -10,17 +12,16 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.hipi.image.FloatImage;
-import org.hipi.image.HipiImageHeader;
-import org.hipi.imagebundle.mapreduce.HibInputFormat;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
 import java.io.IOException;
 
 
 /**
  * Created by gireeshbabu on 15/06/17.
  */
-public class CropImage extends Configured implements Tool {
+public class CropByteImage extends Configured implements Tool {
 
     String seedPointsStr; //in the format x1,y1:x2,y2:,x2,y3
 
@@ -33,14 +34,14 @@ public class CropImage extends Configured implements Tool {
         // Initialize and configure MapReduce job
         Job job = Job.getInstance();
         // Set input format class which parses the input HIB and spawns map tasks
-        job.setInputFormatClass(HibInputFormat.class);
+        job.setInputFormatClass(ImageInputFormat.class);
         // Set the driver, mapper, and reducer classes which express the computation
-        job.setJarByClass(CropImage.class);
+        job.setJarByClass(CropByteImage.class);
         job.setMapperClass(ImageMapper.class);
         job.setReducerClass(ImageReducer.class);
         // Set the types for the key/value pairs passed to/from map and reduce layers
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(FloatImage.class);
+        job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
@@ -56,29 +57,28 @@ public class CropImage extends Configured implements Tool {
         return success ? 0 : 1;
     }
 
-    public static class ImageMapper extends Mapper<HipiImageHeader, FloatImage, Text, FloatImage>{
+    public static class ImageMapper extends Mapper<Text, ImageWritable, Text, Text>{
 
-        public void map(HipiImageHeader key, FloatImage value, Context context) throws IOException, InterruptedException {
-        // Verify that image was properly decoded, is of sufficient size, and has three color channels (RGB)
-            if (value != null && value.getWidth() > 1 && value.getHeight() > 1 && value.getNumBands() == 3) {
+        public void map(Text key, ImageWritable value, Context context) throws IOException, InterruptedException {
 
+            BufferedImage tmpImage = value.buffer;
+            int w = tmpImage.getWidth();
+            int h = tmpImage.getHeight();
+            Raster raster = tmpImage.getRaster();
 
-                // Get dimensions of image
-                int w = value.getWidth();
-                int h = value.getHeight();
+            // Verify that image was properly decoded, is of sufficient size, and has three color channels (RGB)
+            if (value != null && w> 1 && h > 1) {
+
                 long size = w * h;
 
                 int seedIntensity = 100;
 
-                // Get pointer to image data
-                float[] valData = value.getData();
-
-                float xyl = 0;
+                int xyl = 0;
                 float xyr = 0;
                 float xyu = 0;
                 float xyd = 0;
-                float[] intensity = new float[2];
-                FloatImage extractedImage = null;
+                //float[] intensity = new float[2];
+                //ByteImage extractedImage = null;
 
                 // Traverse image pixel data in raster-scan order and update running average
                 for (int j = 0; j < h; j++) {
@@ -86,11 +86,11 @@ public class CropImage extends Configured implements Tool {
 
                         String cord = String.format("%3d,%3d,",i,j);
                         //write image as it is
-                        xyl = valData[(j*w+i)];
-                        intensity[0] = xyl;// xyl;
-                        intensity[1] = xyl;//calculateConnectedValue(xyl, seedIntensity);
-                        extractedImage = new FloatImage(1, 1, 2, intensity);
-                        context.write(new Text(cord), extractedImage);
+                        xyl = raster.getSample(i,j,0);
+                        //intensity[0] = xyl;// xyl;
+                        //intensity[1] = xyl;//calculateConnectedValue(xyl, seedIntensity);
+                        //extractedImage = new ByteImage();
+                        context.write(new Text(cord), new Text(""+xyl));
                         /*
                         if(((j*w+i)-1)> 0){
                             xyl = valData[(j*w+i)-1];
@@ -152,21 +152,21 @@ public class CropImage extends Configured implements Tool {
 
     }
 
-    public static class ImageReducer extends Reducer<Text, FloatImage, Text, Text>{
+    public static class ImageReducer extends Reducer<Text, Text, Text, Text>{
 
-        public void reduce(Text key, Iterable<FloatImage> values, Context context) throws IOException, InterruptedException {
-        // Create FloatImage object to hold final result
+        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+        // Create ByteImage object to hold final result
 
 
-            // Initialize a counter and iterate over IntWritable/FloatImage records from mapper
+            // Initialize a counter and iterate over IntWritable/ByteImage records from mapper
             float threshold = 0.5f;
-            for (FloatImage val : values) {
+            for (Text val : values) {
 
                 //if ( val.getData()[1] > threshold ) {
 
                     //String result = String.format("Average pixel value: %f %f %f", avgData[0], avgData[1], avgData[2]);
                     // Emit output of job which will be written to HDFS
-                    context.write(key, new Text( String.valueOf(val.getData()[0])));
+                    context.write(key, val);
                 //}
             }
 
@@ -175,7 +175,7 @@ public class CropImage extends Configured implements Tool {
 
 
     public static void main(String[] args) throws Exception {
-        ToolRunner.run(new CropImage(), args);
+        ToolRunner.run(new CropByteImage(), args);
         System.exit(0);
     }
 
