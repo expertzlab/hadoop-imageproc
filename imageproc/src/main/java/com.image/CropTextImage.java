@@ -20,7 +20,6 @@ import java.io.IOException;
  */
 public class CropTextImage extends Configured implements Tool {
 
-    String seedPointsStr; //in the format x1,y1:x2,y2:,x2,y3
 
     public int run(String[] args) throws Exception {
         // Check input arguments
@@ -29,7 +28,7 @@ public class CropTextImage extends Configured implements Tool {
             System.exit(0);
         }
 
-        boolean success = MRMean1Job.triggerJobAndWait(args[0],args[0]+"/temp1");
+        boolean success = MRMean1Job.triggerJobAndWait(args[0],args[1]);
 
 
         // Return success or failure
