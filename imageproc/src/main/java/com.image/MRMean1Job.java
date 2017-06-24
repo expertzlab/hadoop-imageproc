@@ -1,5 +1,6 @@
 package com.image;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -94,14 +95,15 @@ public class MRMean1Job {
                     xyCoordinates.add(str);
                 }
             }
-
+            System.out.println("BEGIN : Size of values in reduce : "+ xyCoordinates.size());
+            System.out.println("seed key:"+key);
             //mean of sum
             float[] meanResults = getIntesityMeanOfSumAndDiff(xyCoordinates);
             float m1 = meanResults[0];
             float m2 = meanResults[1];
             float[] sdResults = getIntensityDeviationsofSumAndDiff(meanResults, xyCoordinates);
             float s1 = sdResults[0];
-            float s2 = sdResults[0];
+            float s2 = sdResults[1];
 
             reduceOnConnectedValue(key, xyCoordinates, context, seedPoint, m1, m2, s1, s2);
 
@@ -121,90 +123,116 @@ public class MRMean1Job {
 
             int seedx = Integer.parseInt( seedPoint[0]);
             int seedy = Integer.parseInt( seedPoint[1]);
+
             String nextKey = seedKey.toString();
             if(!pixelValuesMap.containsKey(nextKey)){
                 throw new IllegalArgumentException("The seed intensity not obtained because of x,y value");
             }
-            int seedIntensity = pixelValuesMap.get(nextKey);
             int pixelCount = pixelValuesMap.size();
-            int count = pixelCount;
+            int count = pixelCount -1;
             while(count > 0) {
-                count --;
-                if(nextKey.length() <1)
+                count = count - 3;
+                if(pixelValuesMap.get(nextKey) == null){
+                    System.out.println("Next key returned :" +nextKey+", and the intensity is null and breaking");
                     break;
-                context.write(new Text(nextKey), new Text( String.valueOf(seedIntensity)));
-                pixelValuesMap.put(seedKey.toString(),null);
+                }
+                context.write(new Text(nextKey+","), new Text( pixelValuesMap.get(nextKey).toString()));
+                System.out.println("Next key written: "+nextKey );
+                String previousSeed = nextKey;
 
-                nextKey = findNextPoint(seedx, seedy, pixelValuesMap, m1, m2, s1, s2);
-                while(pixelValuesMap.get(nextKey) == null && count > 0 && nextKey.length() > 1) {
-                    String[] nextSeedPoint = nextKey.split(",");
+                String[] nextSeedPoint = nextKey.split(",");
+                seedx = Integer.parseInt( nextSeedPoint[0]);
+                seedy = Integer.parseInt( nextSeedPoint[1]);
+                nextKey = findNextPoint(seedx, seedy, previousSeed, pixelValuesMap, m1, m2, s1, s2);
+                pixelValuesMap.put(previousSeed,null);
+
+                while(nextKey.length() != 0  && pixelValuesMap.get(nextKey) == null && count > 0 ) {
+                    nextSeedPoint = nextKey.split(",");
                     seedx = Integer.parseInt( nextSeedPoint[0]);
                     seedy = Integer.parseInt( nextSeedPoint[1]);
-                    nextKey = findNextPoint(seedx, seedy, pixelValuesMap, m1, m2, s1, s2);
+                    nextKey = findNextPoint(seedx, seedy, previousSeed, pixelValuesMap, m1, m2, s1, s2);
+                    System.out.println("Next key which is null: "+nextKey );
+                    previousSeed = seedx+","+seedy;
                 }
 
             }
 
         }
 
-        private static String findNextPoint(int seedx, int seedy, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
+        private static String findNextPoint(int seedx, int seedy, String previousSeed, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
 
             String seedkey = ""+seedx+","+seedy;
-
+            System.out.println("New seed key :"+ seedkey);
 
             float connectedValueTemp = 0;
-            float connectedValueMin = 0;
+            float connectedValueMin = 0.6f;
             String nextKey = "";
 
             String xyl = ""+(seedx-1)+","+(seedy);
-            if(pixelValuesMap.get(xyl)!= null) {
+            System.out.println("Trying on xyl:"+xyl+",intensity:"+pixelValuesMap.get(xyl));
+            if(pixelValuesMap.get(xyl)!= null && !xyl.equals(previousSeed)) {
                 nextKey = xyl;
                 connectedValueMin = calcConnectedValueTo(seedkey, xyl, pixelValuesMap, m1, m2, s1, s2);
+                System.out.println("xyl:"+xyl+", connected value :"+ connectedValueMin);
             }
 
             String xyr = ""+(seedx+1)+","+(seedy);
-            if(pixelValuesMap.get(xyr)!= null) {
+            System.out.println("Trying on xyr:"+xyr+",intensity:"+pixelValuesMap.get(xyr));
+            if(pixelValuesMap.get(xyr)!= null && !xyl.equals(previousSeed) ) {
                 connectedValueTemp = calcConnectedValueTo(seedkey, xyr, pixelValuesMap, m1, m2, s1, s2);
+                System.out.println("xyr:"+xyr+", connected value :"+ connectedValueTemp);
                 if (connectedValueTemp < connectedValueMin) {
                     nextKey = xyr;
                     connectedValueMin = connectedValueTemp;
+                } else{
+                    pixelValuesMap.put(xyr, null);
                 }
             }
 
 
             String xyu = ""+(seedx)+","+(seedy-1);
-            if(pixelValuesMap.get(xyu)!= null) {
+            System.out.println("Trying on xyu: "+xyu+",intensity:"+pixelValuesMap.get(xyu));
+            if(pixelValuesMap.get(xyu)!= null && !xyl.equals(previousSeed)) {
                 connectedValueTemp = calcConnectedValueTo(seedkey, xyu, pixelValuesMap, m1, m2, s1, s2);
+                System.out.println("xyu : "+xyu+", connected value :"+ connectedValueTemp);
                 if(connectedValueTemp < connectedValueMin){
                     nextKey = xyu;
                     connectedValueMin = connectedValueTemp;
+                }else{
+                    pixelValuesMap.put(xyu, null);
                 }
             }
 
             String xyd = ""+(seedx)+","+(seedy+1);
-            if(pixelValuesMap.get(xyd)!= null) {
+            System.out.println("Trying on xyd:"+xyd+",intensity:"+pixelValuesMap.get(xyd));
+            if(pixelValuesMap.get(xyd)!= null && !xyl.equals(previousSeed)) {
                 connectedValueTemp = calcConnectedValueTo(seedkey, xyd, pixelValuesMap, m1, m2, s1, s2);
+                System.out.println("xyd:"+xyd+", connected value :"+ connectedValueTemp);
                 if (connectedValueTemp < connectedValueMin) {
                     nextKey = xyd;
+                } else {
+                    pixelValuesMap.put(xyd, null);
                 }
             }
 
-            if(connectedValueMin < 0){
-                nextKey = "";
+            if(!nextKey.equals(xyl)){
+                pixelValuesMap.put(xyl, null);
             }
             return nextKey;
         }
 
         public static float calcConnectedValueTo(String seedkey, String xy, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
 
-            if(pixelValuesMap.get(seedkey) == null || pixelValuesMap.get(xy) == null)
-                return -1;
             int seedIntensity = (int) pixelValuesMap.get(seedkey);
             int pixelIntensity = (int) pixelValuesMap.get(xy);
+            System.out.println("SeedIntensity = "+ seedIntensity+ ", pixelIntensity ="+pixelIntensity);
+            System.out.printf("m1=%f,m2=%f,s1=%f,s2=%f\n",m1,m2,s1,s2);
             double g1 = Math.exp(Math.pow((((0.5*(seedIntensity + pixelIntensity))- m1)/s1),2)/2);
             double g2 = Math.exp(Math.pow((((0.5*(seedIntensity - pixelIntensity))- m2)/s2),2)/2);
-            float w1 = (float) (g1 / (g1+g2));
-            float w2 = 1 - w1;
+            //float w1 = (float) (g1 / (g1+g2));
+            //float w2 = 1 - w1;
+            float w1 = 0.5f;
+            float w2 = 0.5f;
             float mu = (float) (w1 * g1 + w2 * g2);
             return mu;
 
@@ -213,7 +241,7 @@ public class MRMean1Job {
 
         private float[] getIntensityDeviationsofSumAndDiff(float[] meanResults, List<String> xyIntensityValues) {
 
-            int size = 1;
+            int size = xyIntensityValues.size();
             float m1 = meanResults[0];
             float m2 = meanResults[1];
 
@@ -225,11 +253,11 @@ public class MRMean1Job {
 
 
             for (String str : xyIntensityValues) {
-                size = size + 1;
                 String[] pixelVal = str.split(",");
                 int pixelIntensity = Integer.parseInt(pixelVal[2]);
-                deviationSum1 += (deviationSum1 +  Math.pow((pixelIntensity - m1),2) );
-                deviationSum2 += (deviationSum2 +  Math.pow((pixelIntensity - m2),2) );
+                //System.out.println("pixel intensity-"+pixelIntensity);
+                deviationSum1 = (int)(deviationSum1 +  Math.pow((pixelIntensity - m1),2) );
+                deviationSum2 = (int)(deviationSum2 +  Math.pow((pixelIntensity - m2),2) );
             }
             sd[0] = (float) Math.sqrt(deviationSum1/size);
             sd[1] = (float) Math.sqrt(deviationSum2/size);
@@ -248,10 +276,10 @@ public class MRMean1Job {
                 String[] pixelVal = str.split(",");
                 int pixelIntensity = Integer.parseInt(pixelVal[2]);
                 int seedIntensity = Integer.parseInt(pixelVal[3]);
-                preMeanSumofIntensitySum += preMeanSumofIntensitySum + (0.5 *(seedIntensity + pixelIntensity));
-                preMeanSumofIntensityDiff += preMeanSumofIntensityDiff + (0.5 *(seedIntensity - pixelIntensity));
+                preMeanSumofIntensitySum += (0.5 *(seedIntensity + pixelIntensity));
+                preMeanSumofIntensityDiff += (0.5 *(seedIntensity - pixelIntensity));
             }
-            System.out.println("Size of values in reduce - "+ size);
+            //System.out.println("Size of values in reduce - "+ size);
             results[0] = (preMeanSumofIntensitySum / size);
             results[1] =  (preMeanSumofIntensityDiff / size);
             return results;

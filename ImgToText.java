@@ -23,7 +23,7 @@ public class ImgToText {
             Raster raster = originalImage.getData();
             int[][] imgArr = new int[width][height];
             PrintWriter writer = new PrintWriter("xy_cord.txt", "UTF-8");
-            writer.println(width+","+height+","+"");
+
 
             // convert BufferedImage to byte array
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -35,9 +35,11 @@ public class ImgToText {
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     imgArr[i][j] = raster.getSample(i, j, 0);
+
                     writer.println(i+","+j+","+imgArr[i][j]);
                 }
             }
+            writer.close();
 
         } catch (IOException e) {
             System.out.println(e.getMessage());

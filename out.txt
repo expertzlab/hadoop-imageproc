@@ -1,0 +1,1019 @@
+
+
+Container: container_1498294817356_0007_01_000002 on gireeshs-mbp-3_50497
+===========================================================================
+LogType:stderr
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:0
+Log Contents:
+
+LogType:stdout
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:0
+Log Contents:
+
+LogType:syslog
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:3756
+Log Contents:
+2017-06-24 15:54:44,054 WARN [main] org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2017-06-24 15:54:44,205 INFO [main] org.apache.hadoop.metrics2.impl.MetricsConfig: loaded properties from hadoop-metrics2.properties
+2017-06-24 15:54:44,293 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled snapshot period at 10 second(s).
+2017-06-24 15:54:44,293 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: MapTask metrics system started
+2017-06-24 15:54:44,305 INFO [main] org.apache.hadoop.mapred.YarnChild: Executing with tokens:
+2017-06-24 15:54:44,305 INFO [main] org.apache.hadoop.mapred.YarnChild: Kind: mapreduce.job, Service: job_1498294817356_0007, Ident: (org.apache.hadoop.mapreduce.security.token.JobTokenIdentifier@475e586c)
+2017-06-24 15:54:44,394 INFO [main] org.apache.hadoop.mapred.YarnChild: Sleeping for 0ms before retrying again. Got null now.
+2017-06-24 15:54:44,736 INFO [main] org.apache.hadoop.mapred.YarnChild: mapreduce.cluster.local.dir for child: /Users/gireeshbabu/workspace/tools/hadoop/tmp/nm-local-dir/usercache/gireeshbabu/appcache/application_1498294817356_0007
+2017-06-24 15:54:44,989 INFO [main] org.apache.hadoop.conf.Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+2017-06-24 15:54:45,465 INFO [main] org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter: File Output Committer Algorithm version is 1
+2017-06-24 15:54:45,473 INFO [main] org.apache.hadoop.yarn.util.ProcfsBasedProcessTree: ProcfsBasedProcessTree currently is supported only on Linux.
+2017-06-24 15:54:45,473 INFO [main] org.apache.hadoop.mapred.Task:  Using ResourceCalculatorProcessTree : null
+2017-06-24 15:54:45,595 INFO [main] org.apache.hadoop.mapred.MapTask: Processing split: hdfs://localhost:9000/input/xy_cord.txt:0+32764
+2017-06-24 15:54:45,653 INFO [main] org.apache.hadoop.mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+2017-06-24 15:54:45,653 INFO [main] org.apache.hadoop.mapred.MapTask: mapreduce.task.io.sort.mb: 100
+2017-06-24 15:54:45,653 INFO [main] org.apache.hadoop.mapred.MapTask: soft limit at 83886080
+2017-06-24 15:54:45,653 INFO [main] org.apache.hadoop.mapred.MapTask: bufstart = 0; bufvoid = 104857600
+2017-06-24 15:54:45,653 INFO [main] org.apache.hadoop.mapred.MapTask: kvstart = 26214396; length = 6553600
+2017-06-24 15:54:45,656 INFO [main] org.apache.hadoop.mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+2017-06-24 15:54:45,996 INFO [main] org.apache.hadoop.mapred.MapTask: Starting flush of map output
+2017-06-24 15:54:45,996 INFO [main] org.apache.hadoop.mapred.MapTask: Spilling map output
+2017-06-24 15:54:45,996 INFO [main] org.apache.hadoop.mapred.MapTask: bufstart = 0; bufend = 201441; bufvoid = 104857600
+2017-06-24 15:54:45,996 INFO [main] org.apache.hadoop.mapred.MapTask: kvstart = 26214396(104857584); kvend = 26173132(104692528); length = 41265/6553600
+2017-06-24 15:54:46,037 INFO [main] org.apache.hadoop.mapred.MapTask: Finished spill 0
+2017-06-24 15:54:46,045 INFO [main] org.apache.hadoop.mapred.Task: Task:attempt_1498294817356_0007_m_000000_0 is done. And is in the process of committing
+2017-06-24 15:54:46,087 INFO [main] org.apache.hadoop.mapred.Task: Task 'attempt_1498294817356_0007_m_000000_0' done.
+2017-06-24 15:54:46,193 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Stopping MapTask metrics system...
+2017-06-24 15:54:46,193 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: MapTask metrics system stopped.
+2017-06-24 15:54:46,193 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: MapTask metrics system shutdown complete.
+
+
+
+Container: container_1498294817356_0007_01_000001 on gireeshs-mbp-3_50497
+===========================================================================
+LogType:stderr
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:222
+Log Contents:
+log4j:WARN No appenders could be found for logger (org.apache.hadoop.ipc.Server).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+
+LogType:stdout
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:0
+Log Contents:
+
+LogType:syslog
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:35431
+Log Contents:
+2017-06-24 15:54:36,295 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Created MRAppMaster for application appattempt_1498294817356_0007_000001
+2017-06-24 15:54:38,211 WARN [main] org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2017-06-24 15:54:38,224 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Executing with tokens:
+2017-06-24 15:54:38,224 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Kind: YARN_AM_RM_TOKEN, Service: , Ident: (org.apache.hadoop.yarn.security.AMRMTokenIdentifier@55b7a4e0)
+2017-06-24 15:54:38,268 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Using mapred newApiCommitter.
+2017-06-24 15:54:39,008 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: OutputCommitter set in config null
+2017-06-24 15:54:39,072 INFO [main] org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter: File Output Committer Algorithm version is 1
+2017-06-24 15:54:39,076 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: OutputCommitter is org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter
+2017-06-24 15:54:39,106 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.jobhistory.EventType for class org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler
+2017-06-24 15:54:39,107 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.job.event.JobEventType for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$JobEventDispatcher
+2017-06-24 15:54:39,108 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.job.event.TaskEventType for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$TaskEventDispatcher
+2017-06-24 15:54:39,109 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.job.event.TaskAttemptEventType for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$TaskAttemptEventDispatcher
+2017-06-24 15:54:39,109 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventType for class org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler
+2017-06-24 15:54:39,114 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.speculate.Speculator$EventType for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$SpeculatorEventDispatcher
+2017-06-24 15:54:39,115 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.rm.ContainerAllocator$EventType for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$ContainerAllocatorRouter
+2017-06-24 15:54:39,116 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncher$EventType for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$ContainerLauncherRouter
+2017-06-24 15:54:39,157 INFO [main] org.apache.hadoop.mapreduce.v2.jobhistory.JobHistoryUtils: Default file system [hdfs://localhost:9000]
+2017-06-24 15:54:39,183 INFO [main] org.apache.hadoop.mapreduce.v2.jobhistory.JobHistoryUtils: Default file system [hdfs://localhost:9000]
+2017-06-24 15:54:39,212 INFO [main] org.apache.hadoop.mapreduce.v2.jobhistory.JobHistoryUtils: Default file system [hdfs://localhost:9000]
+2017-06-24 15:54:39,223 INFO [main] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Emitting job history data to the timeline server is not enabled
+2017-06-24 15:54:39,308 INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class org.apache.hadoop.mapreduce.v2.app.job.event.JobFinishEvent$Type for class org.apache.hadoop.mapreduce.v2.app.MRAppMaster$JobFinishEventHandler
+2017-06-24 15:54:39,515 INFO [main] org.apache.hadoop.metrics2.impl.MetricsConfig: loaded properties from hadoop-metrics2.properties
+2017-06-24 15:54:39,584 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled snapshot period at 10 second(s).
+2017-06-24 15:54:39,584 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: MRAppMaster metrics system started
+2017-06-24 15:54:39,594 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Adding job token for job_1498294817356_0007 to jobTokenSecretManager
+2017-06-24 15:54:39,716 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Not uberizing job_1498294817356_0007 because: not enabled; too much RAM;
+2017-06-24 15:54:39,730 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Input size for job job_1498294817356_0007 = 32764. Number of splits = 1
+2017-06-24 15:54:39,731 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Number of reduces for job job_1498294817356_0007 = 1
+2017-06-24 15:54:39,731 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: job_1498294817356_0007Job Transitioned from NEW to INITED
+2017-06-24 15:54:39,732 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: MRAppMaster launching normal, non-uberized, multi-container job job_1498294817356_0007.
+2017-06-24 15:54:39,755 INFO [main] org.apache.hadoop.ipc.CallQueueManager: Using callQueue class java.util.concurrent.LinkedBlockingQueue
+2017-06-24 15:54:39,768 INFO [Socket Reader #1 for port 51243] org.apache.hadoop.ipc.Server: Starting Socket Reader #1 for port 51243
+2017-06-24 15:54:39,787 INFO [main] org.apache.hadoop.yarn.factories.impl.pb.RpcServerFactoryPBImpl: Adding protocol org.apache.hadoop.mapreduce.v2.api.MRClientProtocolPB to the server
+2017-06-24 15:54:39,787 INFO [IPC Server Responder] org.apache.hadoop.ipc.Server: IPC Server Responder: starting
+2017-06-24 15:54:39,787 INFO [IPC Server listener on 51243] org.apache.hadoop.ipc.Server: IPC Server listener on 51243: starting
+2017-06-24 15:54:39,789 INFO [main] org.apache.hadoop.mapreduce.v2.app.client.MRClientService: Instantiated MRClientService at gireeshs-mbp-3/192.168.43.50:51243
+2017-06-24 15:54:39,853 INFO [main] org.mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+2017-06-24 15:54:39,858 INFO [main] org.apache.hadoop.http.HttpRequestLog: Http request log for http.requests.mapreduce is not defined
+2017-06-24 15:54:39,866 INFO [main] org.apache.hadoop.http.HttpServer2: Added global filter 'safety' (class=org.apache.hadoop.http.HttpServer2$QuotingInputFilter)
+2017-06-24 15:54:39,870 INFO [main] org.apache.hadoop.http.HttpServer2: Added filter AM_PROXY_FILTER (class=org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter) to context mapreduce
+2017-06-24 15:54:39,870 INFO [main] org.apache.hadoop.http.HttpServer2: Added filter AM_PROXY_FILTER (class=org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter) to context static
+2017-06-24 15:54:39,873 INFO [main] org.apache.hadoop.http.HttpServer2: adding path spec: /mapreduce/*
+2017-06-24 15:54:39,874 INFO [main] org.apache.hadoop.http.HttpServer2: adding path spec: /ws/*
+2017-06-24 15:54:39,881 INFO [main] org.apache.hadoop.http.HttpServer2: Jetty bound to port 51244
+2017-06-24 15:54:39,881 INFO [main] org.mortbay.log: jetty-6.1.26.cloudera.4
+2017-06-24 15:54:39,905 INFO [main] org.mortbay.log: Extract jar:file:/Users/gireeshbabu/workspace/tools/hadoop/hadoop-2.6.0-cdh5.4.1/share/hadoop/yarn/hadoop-yarn-common-2.6.0-cdh5.4.1.jar!/webapps/mapreduce to /var/folders/lh/nddqhphx6277z_hkh8ngggjr0000gn/T/Jetty_0_0_0_0_51244_mapreduce____vpo7dv/webapp
+2017-06-24 15:54:40,251 INFO [main] org.mortbay.log: Started HttpServer2$SelectChannelConnectorWithSafeStartup@0.0.0.0:51244
+2017-06-24 15:54:40,252 INFO [main] org.apache.hadoop.yarn.webapp.WebApps: Web app /mapreduce started at 51244
+2017-06-24 15:54:40,645 INFO [main] org.apache.hadoop.yarn.webapp.WebApps: Registered webapp guice modules
+2017-06-24 15:54:40,650 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.speculate.DefaultSpeculator: JOB_CREATE job_1498294817356_0007
+2017-06-24 15:54:40,652 INFO [main] org.apache.hadoop.ipc.CallQueueManager: Using callQueue class java.util.concurrent.LinkedBlockingQueue
+2017-06-24 15:54:40,653 INFO [Socket Reader #1 for port 51245] org.apache.hadoop.ipc.Server: Starting Socket Reader #1 for port 51245
+2017-06-24 15:54:40,659 INFO [IPC Server Responder] org.apache.hadoop.ipc.Server: IPC Server Responder: starting
+2017-06-24 15:54:40,660 INFO [IPC Server listener on 51245] org.apache.hadoop.ipc.Server: IPC Server listener on 51245: starting
+2017-06-24 15:54:40,684 INFO [main] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: nodeBlacklistingEnabled:true
+2017-06-24 15:54:40,684 INFO [main] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: maxTaskFailuresPerNode is 3
+2017-06-24 15:54:40,684 INFO [main] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: blacklistDisablePercent is 33
+2017-06-24 15:54:40,743 INFO [main] org.apache.hadoop.yarn.client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8030
+2017-06-24 15:54:40,829 INFO [main] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: maxContainerCapability: <memory:8192, vCores:8>
+2017-06-24 15:54:40,829 INFO [main] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: queue: root.gireeshbabu
+2017-06-24 15:54:40,834 INFO [main] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Upper limit on the thread pool size is 500
+2017-06-24 15:54:40,836 INFO [main] org.apache.hadoop.yarn.client.api.impl.ContainerManagementProtocolProxy: yarn.client.max-cached-nodemanagers-proxies : 0
+2017-06-24 15:54:40,844 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: job_1498294817356_0007Job Transitioned from INITED to SETUP
+2017-06-24 15:54:40,846 INFO [CommitterEvent Processor #0] org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler: Processing the event EventType: JOB_SETUP
+2017-06-24 15:54:40,858 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: job_1498294817356_0007Job Transitioned from SETUP to RUNNING
+2017-06-24 15:54:40,894 INFO [AsyncDispatcher event handler] org.apache.hadoop.yarn.util.RackResolver: Resolved localhost to /default-rack
+2017-06-24 15:54:40,899 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: task_1498294817356_0007_m_000000 Task Transitioned from NEW to SCHEDULED
+2017-06-24 15:54:40,900 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: task_1498294817356_0007_r_000000 Task Transitioned from NEW to SCHEDULED
+2017-06-24 15:54:40,902 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_m_000000_0 TaskAttempt Transitioned from NEW to UNASSIGNED
+2017-06-24 15:54:40,902 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_r_000000_0 TaskAttempt Transitioned from NEW to UNASSIGNED
+2017-06-24 15:54:40,904 INFO [Thread-49] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: mapResourceRequest:<memory:2048, vCores:1>
+2017-06-24 15:54:40,913 INFO [Thread-49] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: reduceResourceRequest:<memory:4096, vCores:1>
+2017-06-24 15:54:40,943 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Event Writer setup for JobId: job_1498294817356_0007, File: hdfs://localhost:9000/tmp/hadoop-yarn/staging/gireeshbabu/.staging/job_1498294817356_0007/job_1498294817356_0007_1.jhist
+2017-06-24 15:54:41,216 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.v2.jobhistory.JobHistoryUtils: Default file system [hdfs://localhost:9000]
+2017-06-24 15:54:41,833 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Before Scheduling: PendingReds:1 ScheduledMaps:1 ScheduledReds:0 AssignedMaps:0 AssignedReds:0 CompletedMaps:0 CompletedReds:0 ContAlloc:0 ContRel:0 HostLocal:0 RackLocal:0
+2017-06-24 15:54:41,862 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: getResources() for application_1498294817356_0007: ask=3 release= 0 newContainers=0 finishedContainers=0 resourcelimit=<memory:9952, vCores:7> knownNMs=1
+2017-06-24 15:54:41,863 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Recalculating schedule, headroom=<memory:9952, vCores:7>
+2017-06-24 15:54:41,863 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Reduce slow start threshold not met. completedMapsForReduceSlowstart 1
+2017-06-24 15:54:42,877 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Got allocated containers 1
+2017-06-24 15:54:42,878 INFO [RMCommunicator Allocator] org.apache.hadoop.yarn.util.RackResolver: Resolved gireeshs-mbp-3 to /default-rack
+2017-06-24 15:54:42,879 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Assigned container container_1498294817356_0007_01_000002 to attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:42,880 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Recalculating schedule, headroom=<memory:7904, vCores:6>
+2017-06-24 15:54:42,880 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Reduce slow start threshold not met. completedMapsForReduceSlowstart 1
+2017-06-24 15:54:42,880 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: After Scheduling: PendingReds:1 ScheduledMaps:0 ScheduledReds:0 AssignedMaps:1 AssignedReds:0 CompletedMaps:0 CompletedReds:0 ContAlloc:1 ContRel:0 HostLocal:0 RackLocal:1
+2017-06-24 15:54:42,920 INFO [AsyncDispatcher event handler] org.apache.hadoop.yarn.util.RackResolver: Resolved gireeshs-mbp-3 to /default-rack
+2017-06-24 15:54:42,939 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: The job-jar file on the remote FS is hdfs://localhost:9000/tmp/hadoop-yarn/staging/gireeshbabu/.staging/job_1498294817356_0007/job.jar
+2017-06-24 15:54:42,942 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: The job-conf file on the remote FS is /tmp/hadoop-yarn/staging/gireeshbabu/.staging/job_1498294817356_0007/job.xml
+2017-06-24 15:54:42,944 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Adding #0 tokens and #1 secret keys for NM use for launching container
+2017-06-24 15:54:42,944 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Size of containertokens_dob is 1
+2017-06-24 15:54:42,944 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Putting shuffle token in serviceData
+2017-06-24 15:54:42,968 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_m_000000_0 TaskAttempt Transitioned from UNASSIGNED to ASSIGNED
+2017-06-24 15:54:42,972 INFO [ContainerLauncher #0] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Processing the event EventType: CONTAINER_REMOTE_LAUNCH for container container_1498294817356_0007_01_000002 taskAttempt attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:42,974 INFO [ContainerLauncher #0] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Launching attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:42,975 INFO [ContainerLauncher #0] org.apache.hadoop.yarn.client.api.impl.ContainerManagementProtocolProxy: Opening proxy : gireeshs-mbp-3:50497
+2017-06-24 15:54:43,023 INFO [ContainerLauncher #0] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Shuffle port returned by ContainerManager for attempt_1498294817356_0007_m_000000_0 : 13562
+2017-06-24 15:54:43,025 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: TaskAttempt: [attempt_1498294817356_0007_m_000000_0] using containerId: [container_1498294817356_0007_01_000002 on NM: [gireeshs-mbp-3:50497]
+2017-06-24 15:54:43,029 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_m_000000_0 TaskAttempt Transitioned from ASSIGNED to RUNNING
+2017-06-24 15:54:43,030 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.speculate.DefaultSpeculator: ATTEMPT_START task_1498294817356_0007_m_000000
+2017-06-24 15:54:43,031 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: task_1498294817356_0007_m_000000 Task Transitioned from SCHEDULED to RUNNING
+2017-06-24 15:54:43,885 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: getResources() for application_1498294817356_0007: ask=3 release= 0 newContainers=0 finishedContainers=0 resourcelimit=<memory:7904, vCores:6> knownNMs=1
+2017-06-24 15:54:44,584 INFO [Socket Reader #1 for port 51245] SecurityLogger.org.apache.hadoop.ipc.Server: Auth successful for job_1498294817356_0007 (auth:SIMPLE)
+2017-06-24 15:54:44,602 INFO [IPC Server handler 3 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: JVM with ID : jvm_1498294817356_0007_m_000002 asked for a task
+2017-06-24 15:54:44,602 INFO [IPC Server handler 3 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: JVM with ID: jvm_1498294817356_0007_m_000002 given task: attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:45,990 INFO [IPC Server handler 3 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Progress of TaskAttempt attempt_1498294817356_0007_m_000000_0 is : 0.0
+2017-06-24 15:54:46,076 INFO [IPC Server handler 1 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Progress of TaskAttempt attempt_1498294817356_0007_m_000000_0 is : 1.0
+2017-06-24 15:54:46,085 INFO [IPC Server handler 0 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Done acknowledgement from attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:46,087 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_m_000000_0 TaskAttempt Transitioned from RUNNING to SUCCESS_CONTAINER_CLEANUP
+2017-06-24 15:54:46,088 INFO [ContainerLauncher #1] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Processing the event EventType: CONTAINER_REMOTE_CLEANUP for container container_1498294817356_0007_01_000002 taskAttempt attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:46,088 INFO [ContainerLauncher #1] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: KILLING attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:46,088 INFO [ContainerLauncher #1] org.apache.hadoop.yarn.client.api.impl.ContainerManagementProtocolProxy: Opening proxy : gireeshs-mbp-3:50497
+2017-06-24 15:54:46,108 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_m_000000_0 TaskAttempt Transitioned from SUCCESS_CONTAINER_CLEANUP to SUCCEEDED
+2017-06-24 15:54:46,117 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: Task succeeded with attempt attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:46,118 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: task_1498294817356_0007_m_000000 Task Transitioned from RUNNING to SUCCEEDED
+2017-06-24 15:54:46,122 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Num completed Tasks: 1
+2017-06-24 15:54:46,898 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Before Scheduling: PendingReds:1 ScheduledMaps:0 ScheduledReds:0 AssignedMaps:1 AssignedReds:0 CompletedMaps:1 CompletedReds:0 ContAlloc:1 ContRel:0 HostLocal:0 RackLocal:1
+2017-06-24 15:54:46,900 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Recalculating schedule, headroom=<memory:7904, vCores:6>
+2017-06-24 15:54:46,900 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Reduce slow start threshold reached. Scheduling reduces.
+2017-06-24 15:54:46,900 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: All maps assigned. Ramping up all remaining reduces:1
+2017-06-24 15:54:46,900 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: After Scheduling: PendingReds:0 ScheduledMaps:0 ScheduledReds:1 AssignedMaps:1 AssignedReds:0 CompletedMaps:1 CompletedReds:0 ContAlloc:1 ContRel:0 HostLocal:0 RackLocal:1
+2017-06-24 15:54:47,907 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: getResources() for application_1498294817356_0007: ask=1 release= 0 newContainers=0 finishedContainers=1 resourcelimit=<memory:9952, vCores:7> knownNMs=1
+2017-06-24 15:54:47,907 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Received completed container container_1498294817356_0007_01_000002
+2017-06-24 15:54:47,907 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: After Scheduling: PendingReds:0 ScheduledMaps:0 ScheduledReds:1 AssignedMaps:0 AssignedReds:0 CompletedMaps:1 CompletedReds:0 ContAlloc:1 ContRel:0 HostLocal:0 RackLocal:1
+2017-06-24 15:54:47,907 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Diagnostics report from attempt_1498294817356_0007_m_000000_0: Container killed by the ApplicationMaster.
+Container killed on request. Exit code is 143
+Container exited with a non-zero exit code 143
+
+2017-06-24 15:54:48,913 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Got allocated containers 1
+2017-06-24 15:54:48,913 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Assigned to reduce
+2017-06-24 15:54:48,913 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Assigned container container_1498294817356_0007_01_000003 to attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:48,913 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: After Scheduling: PendingReds:0 ScheduledMaps:0 ScheduledReds:0 AssignedMaps:0 AssignedReds:1 CompletedMaps:1 CompletedReds:0 ContAlloc:2 ContRel:0 HostLocal:0 RackLocal:1
+2017-06-24 15:54:48,919 INFO [AsyncDispatcher event handler] org.apache.hadoop.yarn.util.RackResolver: Resolved gireeshs-mbp-3 to /default-rack
+2017-06-24 15:54:48,919 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_r_000000_0 TaskAttempt Transitioned from UNASSIGNED to ASSIGNED
+2017-06-24 15:54:48,920 INFO [ContainerLauncher #2] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Processing the event EventType: CONTAINER_REMOTE_LAUNCH for container container_1498294817356_0007_01_000003 taskAttempt attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:48,920 INFO [ContainerLauncher #2] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Launching attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:48,920 INFO [ContainerLauncher #2] org.apache.hadoop.yarn.client.api.impl.ContainerManagementProtocolProxy: Opening proxy : gireeshs-mbp-3:50497
+2017-06-24 15:54:48,932 INFO [ContainerLauncher #2] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Shuffle port returned by ContainerManager for attempt_1498294817356_0007_r_000000_0 : 13562
+2017-06-24 15:54:48,932 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: TaskAttempt: [attempt_1498294817356_0007_r_000000_0] using containerId: [container_1498294817356_0007_01_000003 on NM: [gireeshs-mbp-3:50497]
+2017-06-24 15:54:48,932 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_r_000000_0 TaskAttempt Transitioned from ASSIGNED to RUNNING
+2017-06-24 15:54:48,933 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.speculate.DefaultSpeculator: ATTEMPT_START task_1498294817356_0007_r_000000
+2017-06-24 15:54:48,933 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: task_1498294817356_0007_r_000000 Task Transitioned from SCHEDULED to RUNNING
+2017-06-24 15:54:49,917 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: getResources() for application_1498294817356_0007: ask=1 release= 0 newContainers=0 finishedContainers=0 resourcelimit=<memory:5856, vCores:6> knownNMs=1
+2017-06-24 15:54:50,455 INFO [Socket Reader #1 for port 51245] SecurityLogger.org.apache.hadoop.ipc.Server: Auth successful for job_1498294817356_0007 (auth:SIMPLE)
+2017-06-24 15:54:50,467 INFO [IPC Server handler 4 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: JVM with ID : jvm_1498294817356_0007_r_000003 asked for a task
+2017-06-24 15:54:50,467 INFO [IPC Server handler 4 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: JVM with ID: jvm_1498294817356_0007_r_000003 given task: attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:51,373 INFO [IPC Server handler 4 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: MapCompletionEvents request from attempt_1498294817356_0007_r_000000_0. startIndex 0 maxEvents 10000
+2017-06-24 15:54:52,387 INFO [IPC Server handler 2 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: MapCompletionEvents request from attempt_1498294817356_0007_r_000000_0. startIndex 1 maxEvents 10000
+2017-06-24 15:54:52,940 INFO [IPC Server handler 3 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Progress of TaskAttempt attempt_1498294817356_0007_r_000000_0 is : 0.0
+2017-06-24 15:54:52,998 INFO [IPC Server handler 0 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Progress of TaskAttempt attempt_1498294817356_0007_r_000000_0 is : 0.0
+2017-06-24 15:54:53,491 INFO [IPC Server handler 5 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Commit-pending state update from attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:53,493 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_r_000000_0 TaskAttempt Transitioned from RUNNING to COMMIT_PENDING
+2017-06-24 15:54:53,493 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: attempt_1498294817356_0007_r_000000_0 given a go for committing the task output.
+2017-06-24 15:54:53,494 INFO [IPC Server handler 8 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Commit go/no-go request from attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:53,494 INFO [IPC Server handler 8 on 51245] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: Result of canCommit for attempt_1498294817356_0007_r_000000_0:true
+2017-06-24 15:54:53,506 INFO [IPC Server handler 6 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Progress of TaskAttempt attempt_1498294817356_0007_r_000000_0 is : 1.0
+2017-06-24 15:54:53,511 INFO [IPC Server handler 12 on 51245] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Done acknowledgement from attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:53,512 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_r_000000_0 TaskAttempt Transitioned from COMMIT_PENDING to SUCCESS_CONTAINER_CLEANUP
+2017-06-24 15:54:53,512 INFO [ContainerLauncher #3] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Processing the event EventType: CONTAINER_REMOTE_CLEANUP for container container_1498294817356_0007_01_000003 taskAttempt attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:53,513 INFO [ContainerLauncher #3] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: KILLING attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:53,513 INFO [ContainerLauncher #3] org.apache.hadoop.yarn.client.api.impl.ContainerManagementProtocolProxy: Opening proxy : gireeshs-mbp-3:50497
+2017-06-24 15:54:53,523 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: attempt_1498294817356_0007_r_000000_0 TaskAttempt Transitioned from SUCCESS_CONTAINER_CLEANUP to SUCCEEDED
+2017-06-24 15:54:53,523 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: Task succeeded with attempt attempt_1498294817356_0007_r_000000_0
+2017-06-24 15:54:53,523 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskImpl: task_1498294817356_0007_r_000000 Task Transitioned from RUNNING to SUCCEEDED
+2017-06-24 15:54:53,524 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Num completed Tasks: 2
+2017-06-24 15:54:53,524 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: job_1498294817356_0007Job Transitioned from RUNNING to COMMITTING
+2017-06-24 15:54:53,525 INFO [CommitterEvent Processor #1] org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler: Processing the event EventType: JOB_COMMIT
+2017-06-24 15:54:53,573 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Calling handler for JobFinishedEvent 
+2017-06-24 15:54:53,574 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: job_1498294817356_0007Job Transitioned from COMMITTING to SUCCEEDED
+2017-06-24 15:54:53,575 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: We are finishing cleanly so this is the last retry
+2017-06-24 15:54:53,575 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Notify RMCommunicator isAMLastRetry: true
+2017-06-24 15:54:53,575 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: RMCommunicator notified that shouldUnregistered is: true
+2017-06-24 15:54:53,575 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Notify JHEH isAMLastRetry: true
+2017-06-24 15:54:53,575 INFO [Thread-68] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: JobHistoryEventHandler notified that forceJobCompletion is true
+2017-06-24 15:54:53,575 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Calling stop for all the services
+2017-06-24 15:54:53,576 INFO [Thread-68] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Stopping JobHistoryEventHandler. Size of the outstanding queue size is 0
+2017-06-24 15:54:53,611 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Copying hdfs://localhost:9000/tmp/hadoop-yarn/staging/gireeshbabu/.staging/job_1498294817356_0007/job_1498294817356_0007_1.jhist to hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007-1498299874081-gireeshbabu-imageproc%2D1.0%2DSNAPSHOT.jar-1498299893571-1-1-SUCCEEDED-root.gireeshbabu-1498299880838.jhist_tmp
+2017-06-24 15:54:53,634 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Copied to done location: hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007-1498299874081-gireeshbabu-imageproc%2D1.0%2DSNAPSHOT.jar-1498299893571-1-1-SUCCEEDED-root.gireeshbabu-1498299880838.jhist_tmp
+2017-06-24 15:54:53,637 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Copying hdfs://localhost:9000/tmp/hadoop-yarn/staging/gireeshbabu/.staging/job_1498294817356_0007/job_1498294817356_0007_1_conf.xml to hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007_conf.xml_tmp
+2017-06-24 15:54:53,665 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Copied to done location: hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007_conf.xml_tmp
+2017-06-24 15:54:53,672 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Moved tmp to done: hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007.summary_tmp to hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007.summary
+2017-06-24 15:54:53,675 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Moved tmp to done: hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007_conf.xml_tmp to hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007_conf.xml
+2017-06-24 15:54:53,677 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Moved tmp to done: hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007-1498299874081-gireeshbabu-imageproc%2D1.0%2DSNAPSHOT.jar-1498299893571-1-1-SUCCEEDED-root.gireeshbabu-1498299880838.jhist_tmp to hdfs://localhost:9000/tmp/hadoop-yarn/staging/history/done_intermediate/gireeshbabu/job_1498294817356_0007-1498299874081-gireeshbabu-imageproc%2D1.0%2DSNAPSHOT.jar-1498299893571-1-1-SUCCEEDED-root.gireeshbabu-1498299880838.jhist
+2017-06-24 15:54:53,678 INFO [Thread-68] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Stopped JobHistoryEventHandler. super.stop()
+2017-06-24 15:54:53,681 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Setting job diagnostics to 
+2017-06-24 15:54:53,686 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: History url is http://gireeshs-mbp-3:19888/jobhistory/job/job_1498294817356_0007
+2017-06-24 15:54:53,691 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Waiting for application to be successfully unregistered.
+2017-06-24 15:54:54,697 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Final Stats: PendingReds:0 ScheduledMaps:0 ScheduledReds:0 AssignedMaps:0 AssignedReds:1 CompletedMaps:1 CompletedReds:0 ContAlloc:2 ContRel:0 HostLocal:0 RackLocal:1
+2017-06-24 15:54:54,698 INFO [Thread-68] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Deleting staging directory hdfs://localhost:9000 /tmp/hadoop-yarn/staging/gireeshbabu/.staging/job_1498294817356_0007
+2017-06-24 15:54:54,700 INFO [Thread-68] org.apache.hadoop.ipc.Server: Stopping server on 51245
+2017-06-24 15:54:54,704 INFO [IPC Server listener on 51245] org.apache.hadoop.ipc.Server: Stopping IPC Server listener on 51245
+2017-06-24 15:54:54,705 INFO [IPC Server Responder] org.apache.hadoop.ipc.Server: Stopping IPC Server Responder
+2017-06-24 15:54:54,705 INFO [TaskHeartbeatHandler PingChecker] org.apache.hadoop.mapreduce.v2.app.TaskHeartbeatHandler: TaskHeartbeatHandler thread interrupted
+
+
+
+Container: container_1498294817356_0007_01_000003 on gireeshs-mbp-3_50497
+===========================================================================
+LogType:stderr
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:0
+Log Contents:
+
+LogType:stdout
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:26340
+Log Contents:
+BEGIN : Size of values in reduce : 3439
+seed key:20,20
+Next key written: 20,20
+New seed key :20,20
+Trying on xyl:19,20,intensity:127
+SeedIntensity = 138, pixelIntensity =127
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:19,20, connected value :1.1060487
+Trying on xyr:21,20,intensity:140
+SeedIntensity = 138, pixelIntensity =140
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:21,20, connected value :1.1410714
+Trying on xyu: 20,19,intensity:150
+SeedIntensity = 138, pixelIntensity =150
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 20,19, connected value :1.175083
+Trying on xyd:20,21,intensity:99
+SeedIntensity = 138, pixelIntensity =99
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:20,21, connected value :1.0600725
+Next key written: 20,21
+New seed key :20,21
+Trying on xyl:19,21,intensity:101
+SeedIntensity = 99, pixelIntensity =101
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:19,21, connected value :1.0144742
+Trying on xyr:21,21,intensity:91
+SeedIntensity = 99, pixelIntensity =91
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:21,21, connected value :1.0173917
+Trying on xyu: 20,20,intensity:null
+Trying on xyd:20,22,intensity:93
+SeedIntensity = 99, pixelIntensity =93
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:20,22, connected value :1.0165228
+Next key written: 19,21
+New seed key :19,21
+Trying on xyl:18,21,intensity:90
+SeedIntensity = 101, pixelIntensity =90
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:18,21, connected value :1.0183203
+Trying on xyr:20,21,intensity:null
+Trying on xyu: 19,20,intensity:null
+Trying on xyd:19,22,intensity:117
+SeedIntensity = 101, pixelIntensity =117
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:19,22, connected value :1.0192856
+Next key written: 18,21
+New seed key :18,21
+Trying on xyl:17,21,intensity:99
+SeedIntensity = 90, pixelIntensity =99
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:17,21, connected value :1.0122393
+Trying on xyr:19,21,intensity:null
+Trying on xyu: 18,20,intensity:106
+SeedIntensity = 90, pixelIntensity =106
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 18,20, connected value :1.010014
+Trying on xyd:18,22,intensity:132
+SeedIntensity = 90, pixelIntensity =132
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:18,22, connected value :1.0171477
+Next key written: 18,20
+New seed key :18,20
+Trying on xyl:17,20,intensity:99
+SeedIntensity = 106, pixelIntensity =99
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:17,20, connected value :1.0187416
+Trying on xyr:19,20,intensity:null
+Trying on xyu: 18,19,intensity:143
+SeedIntensity = 106, pixelIntensity =143
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 18,19, connected value :1.0563043
+Trying on xyd:18,21,intensity:null
+Next key written: 17,20
+New seed key :17,20
+Trying on xyl:16,20,intensity:86
+SeedIntensity = 99, pixelIntensity =86
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:16,20, connected value :1.0201902
+Trying on xyr:18,20,intensity:null
+Trying on xyu: 17,19,intensity:139
+SeedIntensity = 99, pixelIntensity =139
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 17,19, connected value :1.0368207
+Trying on xyd:17,21,intensity:null
+Next key written: 16,20
+New seed key :16,20
+Trying on xyl:15,20,intensity:125
+SeedIntensity = 86, pixelIntensity =125
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:15,20, connected value :1.0095851
+Trying on xyr:17,20,intensity:null
+Trying on xyu: 16,19,intensity:149
+SeedIntensity = 86, pixelIntensity =149
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 16,19, connected value :1.0292951
+Trying on xyd:16,21,intensity:89
+SeedIntensity = 86, pixelIntensity =89
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:16,21, connected value :1.019422
+Next key written: 15,20
+New seed key :15,20
+Trying on xyl:14,20,intensity:159
+SeedIntensity = 125, pixelIntensity =159
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:14,20, connected value :1.1544254
+Trying on xyr:16,20,intensity:null
+Trying on xyu: 15,19,intensity:182
+SeedIntensity = 125, pixelIntensity =182
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 15,19, connected value :1.255709
+Trying on xyd:15,21,intensity:92
+SeedIntensity = 125, pixelIntensity =92
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:15,21, connected value :1.0353801
+Next key written: 15,21
+New seed key :15,21
+Trying on xyl:14,21,intensity:137
+SeedIntensity = 92, pixelIntensity =137
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:14,21, connected value :1.023967
+Trying on xyr:16,21,intensity:null
+Trying on xyu: 15,20,intensity:null
+Trying on xyd:15,22,intensity:143
+SeedIntensity = 92, pixelIntensity =143
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:15,22, connected value :1.0307397
+Next key written: 14,21
+New seed key :14,21
+Trying on xyl:13,21,intensity:181
+SeedIntensity = 137, pixelIntensity =181
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:13,21, connected value :1.3233577
+Trying on xyr:15,21,intensity:null
+Trying on xyu: 14,20,intensity:null
+Trying on xyd:14,22,intensity:133
+SeedIntensity = 137, pixelIntensity =133
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:14,22, connected value :1.1177119
+Next key written: 14,22
+New seed key :14,22
+Trying on xyl:13,22,intensity:122
+SeedIntensity = 133, pixelIntensity =122
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:13,22, connected value :1.0816469
+Trying on xyr:15,22,intensity:null
+Trying on xyu: 14,21,intensity:null
+Trying on xyd:14,23,intensity:150
+SeedIntensity = 133, pixelIntensity =150
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:14,23, connected value :1.1545377
+Next key written: 13,22
+New seed key :13,22
+Trying on xyl:12,22,intensity:158
+SeedIntensity = 122, pixelIntensity =158
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:12,22, connected value :1.1395391
+Trying on xyr:14,22,intensity:null
+Trying on xyu: 13,21,intensity:null
+Trying on xyd:13,23,intensity:113
+SeedIntensity = 122, pixelIntensity =113
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:13,23, connected value :1.0452145
+Next key written: 13,23
+New seed key :13,23
+Trying on xyl:12,23,intensity:130
+SeedIntensity = 113, pixelIntensity =130
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:12,23, connected value :1.0497761
+Trying on xyr:14,23,intensity:null
+Trying on xyu: 13,22,intensity:null
+Trying on xyd:13,24,intensity:129
+SeedIntensity = 113, pixelIntensity =129
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:13,24, connected value :1.048352
+Next key written: 13,24
+New seed key :13,24
+Trying on xyl:12,24,intensity:114
+SeedIntensity = 129, pixelIntensity =114
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:12,24, connected value :1.0596966
+Trying on xyr:14,24,intensity:129
+SeedIntensity = 129, pixelIntensity =129
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:14,24, connected value :1.0848137
+Trying on xyu: 13,23,intensity:null
+Trying on xyd:13,25,intensity:90
+SeedIntensity = 129, pixelIntensity =90
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:13,25, connected value :1.039619
+Next key written: 13,25
+New seed key :13,25
+Trying on xyl:12,25,intensity:102
+SeedIntensity = 90, pixelIntensity =102
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:12,25, connected value :1.011072
+Trying on xyr:14,25,intensity:87
+SeedIntensity = 90, pixelIntensity =87
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:14,25, connected value :1.0201334
+Trying on xyu: 13,24,intensity:null
+Trying on xyd:13,26,intensity:55
+SeedIntensity = 90, pixelIntensity =55
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:13,26, connected value :1.067769
+Next key written: 12,25
+New seed key :12,25
+Trying on xyl:11,25,intensity:82
+SeedIntensity = 102, pixelIntensity =82
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:11,25, connected value :1.0231025
+Trying on xyr:13,25,intensity:null
+Trying on xyu: 12,24,intensity:null
+Trying on xyd:12,26,intensity:73
+SeedIntensity = 102, pixelIntensity =73
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:12,26, connected value :1.0309399
+Next key written: 11,25
+New seed key :11,25
+Trying on xyl:10,25,intensity:91
+SeedIntensity = 82, pixelIntensity =91
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:10,25, connected value :1.0189699
+Trying on xyr:12,25,intensity:null
+Trying on xyu: 11,24,intensity:103
+SeedIntensity = 82, pixelIntensity =103
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 11,24, connected value :1.0100068
+Trying on xyd:11,26,intensity:68
+SeedIntensity = 82, pixelIntensity =68
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:11,26, connected value :1.0513256
+Next key written: 11,24
+New seed key :11,24
+Trying on xyl:10,24,intensity:150
+SeedIntensity = 103, pixelIntensity =150
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:10,24, connected value :1.0627345
+Trying on xyr:12,24,intensity:null
+Trying on xyu: 11,23,intensity:163
+SeedIntensity = 103, pixelIntensity =163
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 11,23, connected value :1.0924546
+Trying on xyd:11,25,intensity:null
+Next key written: 10,24
+New seed key :10,24
+Trying on xyl:9,24,intensity:169
+SeedIntensity = 150, pixelIntensity =169
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:9,24, connected value :1.3350635
+Trying on xyr:11,24,intensity:null
+Trying on xyu: 10,23,intensity:175
+SeedIntensity = 150, pixelIntensity =175
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 10,23, connected value :1.3754041
+Trying on xyd:10,25,intensity:null
+Next key written: 9,24
+New seed key :9,24
+Trying on xyl:8,24,intensity:196
+SeedIntensity = 169, pixelIntensity =196
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:8,24, connected value :1.7862102
+Trying on xyr:10,24,intensity:null
+Trying on xyu: 9,23,intensity:195
+SeedIntensity = 169, pixelIntensity =195
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 9,23, connected value :1.7725021
+Trying on xyd:9,25,intensity:112
+SeedIntensity = 169, pixelIntensity =112
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:9,25, connected value :1.1759148
+Next key written: 9,25
+New seed key :9,25
+Trying on xyl:8,25,intensity:170
+SeedIntensity = 112, pixelIntensity =170
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:8,25, connected value :1.1432915
+Trying on xyr:10,25,intensity:null
+Trying on xyu: 9,24,intensity:null
+Trying on xyd:9,26,intensity:79
+SeedIntensity = 112, pixelIntensity =79
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:9,26, connected value :1.026957
+Next key written: 9,26
+New seed key :9,26
+Trying on xyl:8,26,intensity:95
+SeedIntensity = 79, pixelIntensity =95
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:8,26, connected value :1.0164146
+Trying on xyr:10,26,intensity:82
+SeedIntensity = 79, pixelIntensity =82
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:10,26, connected value :1.0313884
+Trying on xyu: 9,25,intensity:null
+Trying on xyd:9,27,intensity:56
+SeedIntensity = 79, pixelIntensity =56
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:9,27, connected value :1.0818104
+Next key written: 8,26
+New seed key :8,26
+Trying on xyl:7,26,intensity:176
+SeedIntensity = 95, pixelIntensity =176
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:7,26, connected value :1.1051542
+Trying on xyr:9,26,intensity:null
+Trying on xyu: 8,25,intensity:null
+Trying on xyd:8,27,intensity:46
+SeedIntensity = 95, pixelIntensity =46
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:8,27, connected value :1.0814409
+Next key written: 8,27
+New seed key :8,27
+Trying on xyl:7,27,intensity:97
+SeedIntensity = 46, pixelIntensity =97
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:7,27, connected value :1.0465658
+Trying on xyr:9,27,intensity:null
+Trying on xyu: 8,26,intensity:null
+Trying on xyd:8,28,intensity:86
+SeedIntensity = 46, pixelIntensity =86
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:8,28, connected value :1.0704458
+Next key written: 7,27
+New seed key :7,27
+Trying on xyl:6,27,intensity:182
+SeedIntensity = 97, pixelIntensity =182
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:6,27, connected value :1.1307204
+Trying on xyr:8,27,intensity:null
+Trying on xyu: 7,26,intensity:null
+Trying on xyd:7,28,intensity:71
+SeedIntensity = 97, pixelIntensity =71
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:7,28, connected value :1.0348451
+Next key written: 7,28
+New seed key :7,28
+Trying on xyl:6,28,intensity:89
+SeedIntensity = 71, pixelIntensity =89
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:6,28, connected value :1.0283539
+Trying on xyr:8,28,intensity:null
+Trying on xyu: 7,27,intensity:null
+Trying on xyd:7,29,intensity:72
+SeedIntensity = 71, pixelIntensity =72
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:7,29, connected value :1.0577662
+Next key written: 6,28
+New seed key :6,28
+Trying on xyl:5,28,intensity:195
+SeedIntensity = 89, pixelIntensity =195
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:5,28, connected value :1.1487949
+Trying on xyr:7,28,intensity:null
+Trying on xyu: 6,27,intensity:null
+Trying on xyd:6,29,intensity:82
+SeedIntensity = 89, pixelIntensity =82
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:6,29, connected value :1.0253624
+Next key written: 6,29
+New seed key :6,29
+Trying on xyl:5,29,intensity:97
+SeedIntensity = 82, pixelIntensity =97
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:5,29, connected value :1.0138354
+Trying on xyr:7,29,intensity:null
+Trying on xyu: 6,28,intensity:null
+Trying on xyd:6,30,intensity:97
+SeedIntensity = 82, pixelIntensity =97
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:6,30, connected value :1.0138354
+Next key written: 5,29
+New seed key :5,29
+Trying on xyl:4,29,intensity:180
+SeedIntensity = 97, pixelIntensity =180
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:4,29, connected value :1.1240169
+Trying on xyr:6,29,intensity:null
+Trying on xyu: 5,28,intensity:null
+Trying on xyd:5,30,intensity:88
+SeedIntensity = 97, pixelIntensity =88
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:5,30, connected value :1.0187806
+Next key written: 5,30
+New seed key :5,30
+Trying on xyl:4,30,intensity:120
+SeedIntensity = 88, pixelIntensity =120
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:4,30, connected value :1.0094211
+Trying on xyr:6,30,intensity:null
+Trying on xyu: 5,29,intensity:null
+Trying on xyd:5,31,intensity:123
+SeedIntensity = 88, pixelIntensity =123
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:5,31, connected value :1.0103314
+Next key written: 4,30
+New seed key :4,30
+Trying on xyl:3,30,intensity:193
+SeedIntensity = 120, pixelIntensity =193
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:3,30, connected value :1.2886525
+Trying on xyr:5,30,intensity:null
+Trying on xyu: 4,29,intensity:null
+Trying on xyd:4,31,intensity:101
+SeedIntensity = 120, pixelIntensity =101
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:4,31, connected value :1.0329556
+Next key written: 4,31
+New seed key :4,31
+Trying on xyl:3,31,intensity:146
+SeedIntensity = 101, pixelIntensity =146
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:3,31, connected value :1.0511091
+Trying on xyr:5,31,intensity:null
+Trying on xyu: 4,30,intensity:null
+Trying on xyd:4,32,intensity:119
+SeedIntensity = 101, pixelIntensity =119
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:4,32, connected value :1.0204157
+Next key written: 4,32
+New seed key :4,32
+Trying on xyl:3,32,intensity:99
+SeedIntensity = 119, pixelIntensity =99
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:3,32, connected value :1.0308299
+Trying on xyr:5,32,intensity:126
+SeedIntensity = 119, pixelIntensity =126
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:5,32, connected value :1.0559708
+Trying on xyu: 4,31,intensity:null
+Trying on xyd:4,33,intensity:121
+SeedIntensity = 119, pixelIntensity =121
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:4,33, connected value :1.0490569
+Next key written: 3,32
+New seed key :3,32
+Trying on xyl:2,32,intensity:140
+SeedIntensity = 99, pixelIntensity =140
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:2,32, connected value :1.0381689
+Trying on xyr:4,32,intensity:null
+Trying on xyu: 3,31,intensity:null
+Trying on xyd:3,33,intensity:126
+SeedIntensity = 99, pixelIntensity =126
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:3,33, connected value :1.0229952
+Next key written: 3,33
+New seed key :3,33
+Trying on xyl:2,33,intensity:118
+SeedIntensity = 126, pixelIntensity =118
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:2,33, connected value :1.0589368
+Trying on xyr:4,33,intensity:null
+Trying on xyu: 3,32,intensity:null
+Trying on xyd:3,34,intensity:139
+SeedIntensity = 126, pixelIntensity =139
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:3,34, connected value :1.098611
+Next key written: 2,33
+New seed key :2,33
+Trying on xyl:1,33,intensity:131
+SeedIntensity = 118, pixelIntensity =131
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:1,33, connected value :1.0617534
+Trying on xyr:3,33,intensity:null
+Trying on xyu: 2,32,intensity:null
+Trying on xyd:2,34,intensity:113
+SeedIntensity = 118, pixelIntensity =113
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:2,34, connected value :1.0386003
+Next key written: 2,34
+New seed key :2,34
+Trying on xyl:1,34,intensity:85
+SeedIntensity = 113, pixelIntensity =85
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:1,34, connected value :1.0249496
+Trying on xyr:3,34,intensity:null
+Trying on xyu: 2,33,intensity:null
+Trying on xyd:2,35,intensity:133
+SeedIntensity = 113, pixelIntensity =133
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:2,35, connected value :1.0543103
+Next key written: 1,34
+New seed key :1,34
+Trying on xyl:0,34,intensity:143
+SeedIntensity = 85, pixelIntensity =143
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:0,34, connected value :1.0210158
+Trying on xyr:2,34,intensity:null
+Trying on xyu: 1,33,intensity:null
+Trying on xyd:1,35,intensity:109
+SeedIntensity = 85, pixelIntensity =109
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:1,35, connected value :1.0079981
+Next key written: 1,35
+New seed key :1,35
+Trying on xyl:0,35,intensity:89
+SeedIntensity = 109, pixelIntensity =89
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:0,35, connected value :1.021751
+Trying on xyr:2,35,intensity:null
+Trying on xyu: 1,34,intensity:null
+Trying on xyd:1,36,intensity:142
+SeedIntensity = 109, pixelIntensity =142
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:1,36, connected value :1.0610557
+Next key written: 0,35
+New seed key :0,35
+Trying on xyl:-1,35,intensity:null
+Trying on xyr:1,35,intensity:null
+Trying on xyu: 0,34,intensity:null
+Trying on xyd:0,36,intensity:83
+SeedIntensity = 89, pixelIntensity =83
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:0,36, connected value :1.0242915
+Next key returned :, and the intensity is null and breaking
+BEGIN : Size of values in reduce : 3439
+seed key:30,20
+Next key written: 30,20
+New seed key :30,20
+Trying on xyl:29,20,intensity:176
+SeedIntensity = 175, pixelIntensity =176
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:29,20, connected value :1.6177278
+Trying on xyr:31,20,intensity:175
+SeedIntensity = 175, pixelIntensity =175
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:31,20, connected value :1.6070015
+Trying on xyu: 30,19,intensity:176
+SeedIntensity = 175, pixelIntensity =176
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 30,19, connected value :1.6177278
+Trying on xyd:30,21,intensity:176
+SeedIntensity = 175, pixelIntensity =176
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:30,21, connected value :1.6177278
+Next key written: 31,20
+New seed key :31,20
+Trying on xyl:30,20,intensity:null
+Trying on xyr:32,20,intensity:183
+SeedIntensity = 175, pixelIntensity =183
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:32,20, connected value :1.6982276
+Trying on xyu: 31,19,intensity:174
+SeedIntensity = 175, pixelIntensity =174
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 31,19, connected value :1.5964587
+Trying on xyd:31,21,intensity:183
+SeedIntensity = 175, pixelIntensity =183
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:31,21, connected value :1.6982276
+Next key returned :, and the intensity is null and breaking
+BEGIN : Size of values in reduce : 3439
+seed key:30,30
+Next key written: 30,30
+New seed key :30,30
+Trying on xyl:29,30,intensity:141
+SeedIntensity = 141, pixelIntensity =141
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:29,30, connected value :1.1557037
+Trying on xyr:31,30,intensity:143
+SeedIntensity = 141, pixelIntensity =143
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:31,30, connected value :1.1624573
+Trying on xyu: 30,29,intensity:132
+SeedIntensity = 141, pixelIntensity =132
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 30,29, connected value :1.1284503
+Trying on xyd:30,31,intensity:143
+SeedIntensity = 141, pixelIntensity =143
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:30,31, connected value :1.1624573
+Next key written: 30,29
+New seed key :30,29
+Trying on xyl:29,29,intensity:135
+SeedIntensity = 132, pixelIntensity =135
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:29,29, connected value :1.1069269
+Trying on xyr:31,29,intensity:152
+SeedIntensity = 132, pixelIntensity =152
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:31,29, connected value :1.1575083
+Trying on xyu: 30,28,intensity:133
+SeedIntensity = 132, pixelIntensity =133
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 30,28, connected value :1.1020765
+Trying on xyd:30,30,intensity:null
+Next key written: 30,28
+New seed key :30,28
+Trying on xyl:29,28,intensity:128
+SeedIntensity = 133, pixelIntensity =128
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:29,28, connected value :1.0936682
+Trying on xyr:31,28,intensity:150
+SeedIntensity = 133, pixelIntensity =150
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:31,28, connected value :1.1545377
+Trying on xyu: 30,27,intensity:147
+SeedIntensity = 133, pixelIntensity =147
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 30,27, connected value :1.1445339
+Trying on xyd:30,29,intensity:null
+Next key written: 29,28
+New seed key :29,28
+Trying on xyl:28,28,intensity:123
+SeedIntensity = 128, pixelIntensity =123
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:28,28, connected value :1.0711194
+Trying on xyr:30,28,intensity:null
+Trying on xyu: 29,27,intensity:134
+SeedIntensity = 128, pixelIntensity =134
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 29,27, connected value :1.0927508
+Trying on xyd:29,29,intensity:null
+Next key written: 28,28
+New seed key :28,28
+Trying on xyl:27,28,intensity:138
+SeedIntensity = 123, pixelIntensity =138
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:27,28, connected value :1.0877516
+Trying on xyr:29,28,intensity:null
+Trying on xyu: 28,27,intensity:136
+SeedIntensity = 123, pixelIntensity =136
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 28,27, connected value :1.0834044
+Trying on xyd:28,29,intensity:116
+SeedIntensity = 123, pixelIntensity =116
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:28,29, connected value :1.0503942
+Next key written: 28,29
+New seed key :28,29
+Trying on xyl:27,29,intensity:127
+SeedIntensity = 116, pixelIntensity =127
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:27,29, connected value :1.0513632
+Trying on xyr:29,29,intensity:null
+Trying on xyu: 28,28,intensity:null
+Trying on xyd:28,30,intensity:118
+SeedIntensity = 116, pixelIntensity =118
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:28,30, connected value :1.040261
+Next key written: 28,30
+New seed key :28,30
+Trying on xyl:27,30,intensity:118
+SeedIntensity = 118, pixelIntensity =118
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:27,30, connected value :1.0436603
+Trying on xyr:29,30,intensity:null
+Trying on xyu: 28,29,intensity:null
+Trying on xyd:28,31,intensity:112
+SeedIntensity = 118, pixelIntensity =112
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:28,31, connected value :1.0377096
+Next key written: 28,31
+New seed key :28,31
+Trying on xyl:27,31,intensity:124
+SeedIntensity = 112, pixelIntensity =124
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:27,31, connected value :1.040153
+Trying on xyr:29,31,intensity:123
+SeedIntensity = 112, pixelIntensity =123
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:29,31, connected value :1.0390174
+Trying on xyu: 28,30,intensity:null
+Trying on xyd:28,32,intensity:117
+SeedIntensity = 112, pixelIntensity =117
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:28,32, connected value :1.0330566
+Next key written: 28,32
+New seed key :28,32
+Trying on xyl:27,32,intensity:121
+SeedIntensity = 117, pixelIntensity =121
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyl:27,32, connected value :1.0453665
+Trying on xyr:29,32,intensity:116
+SeedIntensity = 117, pixelIntensity =116
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:29,32, connected value :1.0398617
+Trying on xyu: 28,31,intensity:null
+Trying on xyd:28,33,intensity:123
+SeedIntensity = 117, pixelIntensity =123
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:28,33, connected value :1.0478599
+Next key written: 29,32
+New seed key :29,32
+Trying on xyl:28,32,intensity:null
+Trying on xyr:30,32,intensity:129
+SeedIntensity = 116, pixelIntensity =129
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyr:30,32, connected value :1.0543008
+Trying on xyu: 29,31,intensity:123
+SeedIntensity = 116, pixelIntensity =123
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyu : 29,31, connected value :1.0460076
+Trying on xyd:29,33,intensity:122
+SeedIntensity = 116, pixelIntensity =122
+m1=97.000000,m2=-47.000000,s1=62.385895,s2=196.458649
+xyd:29,33, connected value :1.044775
+Next key returned :, and the intensity is null and breaking
+
+LogType:syslog
+Log Upload Time:Sat Jun 24 15:55:00 +0530 2017
+LogLength:6334
+Log Contents:
+2017-06-24 15:54:49,957 WARN [main] org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2017-06-24 15:54:50,103 INFO [main] org.apache.hadoop.metrics2.impl.MetricsConfig: loaded properties from hadoop-metrics2.properties
+2017-06-24 15:54:50,188 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled snapshot period at 10 second(s).
+2017-06-24 15:54:50,188 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: ReduceTask metrics system started
+2017-06-24 15:54:50,200 INFO [main] org.apache.hadoop.mapred.YarnChild: Executing with tokens:
+2017-06-24 15:54:50,200 INFO [main] org.apache.hadoop.mapred.YarnChild: Kind: mapreduce.job, Service: job_1498294817356_0007, Ident: (org.apache.hadoop.mapreduce.security.token.JobTokenIdentifier@475e586c)
+2017-06-24 15:54:50,278 INFO [main] org.apache.hadoop.mapred.YarnChild: Sleeping for 0ms before retrying again. Got null now.
+2017-06-24 15:54:50,602 INFO [main] org.apache.hadoop.mapred.YarnChild: mapreduce.cluster.local.dir for child: /Users/gireeshbabu/workspace/tools/hadoop/tmp/nm-local-dir/usercache/gireeshbabu/appcache/application_1498294817356_0007
+2017-06-24 15:54:50,874 INFO [main] org.apache.hadoop.conf.Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+2017-06-24 15:54:51,340 INFO [main] org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter: File Output Committer Algorithm version is 1
+2017-06-24 15:54:51,348 INFO [main] org.apache.hadoop.yarn.util.ProcfsBasedProcessTree: ProcfsBasedProcessTree currently is supported only on Linux.
+2017-06-24 15:54:51,348 INFO [main] org.apache.hadoop.mapred.Task:  Using ResourceCalculatorProcessTree : null
+2017-06-24 15:54:51,351 INFO [main] org.apache.hadoop.mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@3b8f0a79
+2017-06-24 15:54:51,369 INFO [main] org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl: MergerManager: memoryLimit=1503238528, maxSingleShuffleLimit=375809632, mergeThreshold=992137472, ioSortFactor=10, memToMemMergeOutputsThreshold=10
+2017-06-24 15:54:51,372 INFO [EventFetcher for fetching Map Completion Events] org.apache.hadoop.mapreduce.task.reduce.EventFetcher: attempt_1498294817356_0007_r_000000_0 Thread started: EventFetcher for fetching Map Completion Events
+2017-06-24 15:54:51,381 INFO [EventFetcher for fetching Map Completion Events] org.apache.hadoop.mapreduce.task.reduce.EventFetcher: attempt_1498294817356_0007_r_000000_0: Got 1 new map-outputs
+2017-06-24 15:54:51,381 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.ShuffleSchedulerImpl: Assigning gireeshs-mbp-3:13562 with 1 to fetcher#1
+2017-06-24 15:54:51,381 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.ShuffleSchedulerImpl: assigned 1 of 1 to gireeshs-mbp-3:13562 to fetcher#1
+2017-06-24 15:54:52,923 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.Fetcher: for url=13562/mapOutput?job=job_1498294817356_0007&reduce=0&map=attempt_1498294817356_0007_m_000000_0 sent hash and received reply
+2017-06-24 15:54:52,927 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.Fetcher: fetcher#1 about to shuffle output of map attempt_1498294817356_0007_m_000000_0 decomp: 222077 len: 222081 to MEMORY
+2017-06-24 15:54:52,931 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.InMemoryMapOutput: Read 222077 bytes from map-output for attempt_1498294817356_0007_m_000000_0
+2017-06-24 15:54:52,935 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl: closeInMemoryFile -> map-output of size: 222077, inMemoryMapOutputs.size() -> 1, commitMemory -> 0, usedMemory ->222077
+2017-06-24 15:54:52,936 INFO [EventFetcher for fetching Map Completion Events] org.apache.hadoop.mapreduce.task.reduce.EventFetcher: EventFetcher is interrupted.. Returning
+2017-06-24 15:54:52,937 INFO [fetcher#1] org.apache.hadoop.mapreduce.task.reduce.ShuffleSchedulerImpl: gireeshs-mbp-3:13562 freed by fetcher#1 in 1556ms
+2017-06-24 15:54:52,943 INFO [main] org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl: finalMerge called with 1 in-memory map-outputs and 0 on-disk map-outputs
+2017-06-24 15:54:52,950 INFO [main] org.apache.hadoop.mapred.Merger: Merging 1 sorted segments
+2017-06-24 15:54:52,950 INFO [main] org.apache.hadoop.mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 222069 bytes
+2017-06-24 15:54:52,990 INFO [main] org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl: Merged 1 segments, 222077 bytes to disk to satisfy reduce memory limit
+2017-06-24 15:54:52,991 INFO [main] org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl: Merging 1 files, 222081 bytes from disk
+2017-06-24 15:54:52,992 INFO [main] org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl: Merging 0 segments, 0 bytes from memory into reduce
+2017-06-24 15:54:52,992 INFO [main] org.apache.hadoop.mapred.Merger: Merging 1 sorted segments
+2017-06-24 15:54:52,996 INFO [main] org.apache.hadoop.mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 222069 bytes
+2017-06-24 15:54:53,088 INFO [main] org.apache.hadoop.conf.Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords
+2017-06-24 15:54:53,478 INFO [main] org.apache.hadoop.mapred.Task: Task:attempt_1498294817356_0007_r_000000_0 is done. And is in the process of committing
+2017-06-24 15:54:53,495 INFO [main] org.apache.hadoop.mapred.Task: Task attempt_1498294817356_0007_r_000000_0 is allowed to commit now
+2017-06-24 15:54:53,503 INFO [main] org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter: Saved output of task 'attempt_1498294817356_0007_r_000000_0' to hdfs://localhost:9000/output25/_temporary/1/task_1498294817356_0007_r_000000
+2017-06-24 15:54:53,512 INFO [main] org.apache.hadoop.mapred.Task: Task 'attempt_1498294817356_0007_r_000000_0' done.
+2017-06-24 15:54:53,615 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Stopping ReduceTask metrics system...
+2017-06-24 15:54:53,616 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: ReduceTask metrics system stopped.
+2017-06-24 15:54:53,616 INFO [main] org.apache.hadoop.metrics2.impl.MetricsSystemImpl: ReduceTask metrics system shutdown complete.
+
