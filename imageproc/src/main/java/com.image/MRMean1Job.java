@@ -1,6 +1,5 @@
 package com.image;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -61,7 +60,19 @@ public class MRMean1Job {
 
         public static void writeOutPixelsForEachSeedPoint(Mapper<LongWritable, Text, Text, Text>.Context context, String[] splitEachLineRecArray) throws IOException, InterruptedException {
 
-            String[] seedPointsArray = "20,20,50;30,20,50;30,30,50".split(";");
+            String[] seedPointsArray = ("83,137,142;" +
+                    "70,130,89;" +
+                    "56,121,114;" +
+                    "71,109,108;" +
+                    "86,96,51;" +
+                    "106,84,100;" +
+                    "121,79,41;" +
+                    "117,92,159;" +
+                    "104,106,182;" +
+                    "95,116,113;" +
+                    "89,126,141;" +
+                    "81,135,20;" +
+                    "72,127,155").split(";");
 
             String x = splitEachLineRecArray[0];
             String y = splitEachLineRecArray[1];
@@ -151,7 +162,7 @@ public class MRMean1Job {
                     seedx = Integer.parseInt( nextSeedPoint[0]);
                     seedy = Integer.parseInt( nextSeedPoint[1]);
                     nextKey = findNextPoint(seedx, seedy, previousSeed, pixelValuesMap, m1, m2, s1, s2);
-                    System.out.println("Next key which is null: "+nextKey );
+                    System.out.println("In while - Next key which is null: "+nextKey );
                     previousSeed = seedx+","+seedy;
                 }
 
@@ -223,8 +234,9 @@ public class MRMean1Job {
 
         public static float calcConnectedValueTo(String seedkey, String xy, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
 
-            int seedIntensity = (int) pixelValuesMap.get(seedkey);
+           int seedIntensity = (int) pixelValuesMap.get(seedkey);
             int pixelIntensity = (int) pixelValuesMap.get(xy);
+            /*
             System.out.println("SeedIntensity = "+ seedIntensity+ ", pixelIntensity ="+pixelIntensity);
             System.out.printf("m1=%f,m2=%f,s1=%f,s2=%f\n",m1,m2,s1,s2);
             double g1 = Math.exp(Math.pow((((0.5*(seedIntensity + pixelIntensity))- m1)/s1),2)/2);
@@ -234,6 +246,33 @@ public class MRMean1Job {
             float w1 = 0.5f;
             float w2 = 0.5f;
             float mu = (float) (w1 * g1 + w2 * g2);
+            return mu;
+            */
+
+            double term1 = 0.5*(seedIntensity + pixelIntensity);
+            System.out.println("Term 1 ="+ term1);
+            double term2 =  ((term1- m1)/(2*s1));
+            System.out.println("Term 2 ="+ term2);
+            double term3 = - Math.pow(term2,2);
+            System.out.println("Term 3 ="+ term3);
+            double g1 = Math.exp(term3);
+            System.out.println("g1 ="+ g1);
+
+            double termA = 0.5*(seedIntensity - pixelIntensity);
+            System.out.println("Term A ="+ termA);
+            double termB =  ((termA- m1)/(2*s1));
+            System.out.println("Term B ="+ termB);
+            double termC = - Math.pow(termB,2);
+            System.out.println("Term C ="+ termC);
+            double g2 = Math.exp(termC);
+            System.out.println("g2 ="+ g2);
+
+            //float w1 = (float) (g1 / (g1+g2));
+            //float w2 = 1 - w1;
+            float w1 = 0.5f;
+            float w2 = 0.5f;
+            float mu = (float) (w1 * g1 + w2 * g2);
+            System.out.println("MU =" + mu);
             return mu;
 
         }
@@ -249,8 +288,6 @@ public class MRMean1Job {
             int deviationSum2 = 0;
 
             float[] sd = new float[2];
-
-
 
             for (String str : xyIntensityValues) {
                 String[] pixelVal = str.split(",");
