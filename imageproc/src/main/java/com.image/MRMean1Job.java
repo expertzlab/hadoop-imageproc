@@ -10,10 +10,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by gireeshbabu on 21/06/17.
@@ -41,7 +38,7 @@ public class MRMean1Job {
         FileInputFormat.setInputPaths(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outPath));
 
-        // Execute the MapReduce job and block until it complets
+        // Execute the MapReduce job and block until it complete
         return job.waitForCompletion(true);
     }
 
@@ -99,9 +96,18 @@ public class MRMean1Job {
             int seedy = Integer.parseInt(seedPoint[1]);
 
             List<String> xyCoordinates = new ArrayList();
-
+            int w = 1;
+            int h = 1;
             for (Text val : values) {
                 String[] strings = val.toString().split(";");
+                int x = Integer.parseInt(strings[0]);
+                int y = Integer.parseInt(strings[1]);
+                if(x > w){
+                    w = x;
+                }
+                if(y > h){
+                    h = y;
+                }
                 for(String str:strings) {
                     xyCoordinates.add(str);
                 }
@@ -116,12 +122,13 @@ public class MRMean1Job {
             float s1 = sdResults[0];
             float s2 = sdResults[1];
 
-            reduceOnConnectedValue(key, xyCoordinates, context, seedPoint, m1, m2, s1, s2);
+            reduceOnConnectedValue(key, xyCoordinates, context, seedPoint, m1, m2, s1, s2, w, h);
 
         }
 
-        public static void reduceOnConnectedValue(Text seedKey, List<String> xyIntensityList, Reducer<Text, Text, Text, Text>.Context context, String[] seedPoint, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
+        public static void reduceOnConnectedValue(Text seedKey, List<String> xyIntensityList, Reducer<Text, Text, Text, Text>.Context context, String[] seedPoint, float m1, float m2, float s1, float s2, int w, int h) throws IOException, InterruptedException {
 
+            /*
             HashMap<String,Integer> pixelValuesMap = new HashMap<>();
             for (String val : xyIntensityList) {
                 String[] pixelVal = val.split(",");
@@ -130,11 +137,19 @@ public class MRMean1Job {
                 pixelValuesMap.put(xyCoord,pixelIntensity);
 
             }
+            */
+
+            int[] pixelIntensityArray = convertToArray(xyIntensityList, w, h);
 
 
             int seedx = Integer.parseInt( seedPoint[0]);
             int seedy = Integer.parseInt( seedPoint[1]);
+            int pixelSizeTobeAnalyzed = xyIntensityList.size() - 1;
 
+
+
+
+            /*
             String nextKey = seedKey.toString();
             if(!pixelValuesMap.containsKey(nextKey)){
                 throw new IllegalArgumentException("The seed intensity not obtained because of x,y value");
@@ -166,8 +181,170 @@ public class MRMean1Job {
                     previousSeed = seedx+","+seedy;
                 }
 
+            } */
+
+        }
+
+        private static void writeConnectedValueOfCombination(int r, int [][] pixelIntensityArray, int seedx, int seedy, int w, int h) {
+
+            int n = w * h;
+
+            HashMap <HashSet,String> combinationSet = new HashMap<>(fact(n)/(fact(r)*fact(n-r)));
+            for(int i =0; i<n; i++){
+
+            }
+        }
+
+        private static void calculateMeansAndSigmas()
+        {
+
+            //Will never add duplicates, since we use HashSets
+            HashSet<Integer> spels = new HashSet<Integer>();
+            for(int i : m_seeds)
+            {
+                int[] neighbors = getNeighbors(i);
+                for(int j : neighbors)
+                {
+                    if(j == -1)
+                        continue;
+
+                    int[] neighborsNeighbors = getNeighbors(j);
+
+                    for(int k : neighborsNeighbors)
+                    {
+                        if(k == -1)
+                            continue;
+
+                        spels.add(k);
+                    }
+                }
             }
 
+            //Push all combinations of ave and reldiff to the arrays
+            int numSpels = spels.size();
+
+            //Weird java stuff to get all spels from the hasmap into an int array
+            Integer[] temp = spels.toArray(new Integer[numSpels]);
+            int[] spelsArray = new int[temp.length];
+            for(int i = 0; i < numSpels; i++)
+                spelsArray[i] = temp[i];
+
+            int numCombinations = (numSpels * (numSpels - 1)) / 2;
+            float[] aves = new float[numCombinations];
+            float[] reldiffs = new float[numCombinations];
+
+            int count = 0;
+            for(int i = 0; i < numSpels - 1; i++)
+            {
+                for(int j = i+1; j < numSpels; j++)
+                {
+                    aves[count] = ave(spelsArray[i], spelsArray[j]);
+                    reldiffs[count] = reldiff(spelsArray[i], spelsArray[j]);
+
+                    count++;
+                }
+            }
+
+            float[] ave_meanSigma = welford(aves);
+            float[] reldiff_meanSigma = welford(reldiffs);
+
+            m_mean_ave = ave_meanSigma[0];
+            m_sigma_ave = ave_meanSigma[1];
+
+            m_mean_reldiff = reldiff_meanSigma[0];
+            m_sigma_reldiff = reldiff_meanSigma[1];
+
+            System.out.println("ave mean: " + m_mean_ave);
+            System.out.println("ave sigma: " + m_sigma_ave);
+            System.out.println("reldiff mean: " + m_mean_reldiff);
+            System.out.println("reldiff sigma: " + m_sigma_reldiff);
+        }
+
+        /**
+         * Single-pass average and standard deviation calculation
+         * https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Online_algorithm
+         * @param elements list of elements to calculate the average and standard deviation of
+         * @return length 2 float array with [average, standardDeviation]
+         */
+        private static float[] welford(float[] els)
+        {
+            int n = 0;
+            double mean = 0;
+            double M2 = 0;
+            double var = 0;
+            double delta = 0;
+
+            for(float x : els)
+            {
+                n += 1;
+                delta = x - mean;
+                mean += delta / n;
+                M2 += delta * (x - mean);
+            }
+
+            if(n < 2)
+                return null;
+            else
+                var = M2 / (n - 1);
+
+            float[] result = new float[2];
+            result[0] = (float)mean;
+            result[1] = (float)Math.sqrt(var);
+
+            return result;
+        }
+
+        private static float gaussian(float val, float avg, float sigma)
+        {
+            return (float) Math.exp(-(1.0/(2*sigma*sigma)) * (val - avg) * (val - avg));
+        }
+
+        private static float affinity(int c, int d)
+        {
+            float g_ave = gaussian(ave(c, d), m_mean_ave, m_sigma_ave);
+            float g_reldiff = gaussian(reldiff(c, d), m_mean_reldiff, m_sigma_reldiff);
+
+            return Math.min(g_ave, g_reldiff);
+        }
+
+        private static float ave(int c, int d)
+        {
+            return 0.5f * ((float)m_imagePixels[c] + (float)m_imagePixels[d]);
+        }
+
+        private static float reldiff(int c, int d)
+        {
+            float fc = m_imagePixels[c];
+            float fd = m_imagePixels[d];
+
+            return fc == -fd ? 0 : (Math.abs(fc - fd)) / (fc + fd);
+        }
+
+        private static int[] getNeighbors(int c,int w, int h)
+        {
+            int m_width = w;
+            int m_height = h;
+            int m_depth = 1;
+            int m_pixelsPerSlice = w * h;
+
+            int z = c / m_pixelsPerSlice;
+            int y = (c % m_pixelsPerSlice) / m_width;
+            int x = (c % m_pixelsPerSlice) % m_width;
+
+            int[] result = new int[6];
+            result[0] = x < m_width-1 ? 			c + 1 : -1;
+            result[1] = x > 0 ? 					c - 1 : -1;
+            result[2] = y < m_height-1 ? 			c + m_width : -1;
+            result[3] = y > 0 ? 					c - m_width : -1;
+            result[4] = z < m_depth-1 ?			 	c + m_pixelsPerSlice : -1;
+            result[5] = z > 0 ? 					c - m_pixelsPerSlice : -1;
+
+            return result;
+        }
+
+
+        private static int fact(int n){
+            return n * fact(n-1);
         }
 
         private static String findNextPoint(int seedx, int seedy, String previousSeed, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
@@ -322,6 +499,18 @@ public class MRMean1Job {
             return results;
         }
 
+    }
+
+    public static int[]convertToArray(List<String> xyIntensityList, int w, int h) {
+        int[] pixelIntensityArray = new int[w * h];
+        for (String val : xyIntensityList) {
+            String[] pixelVal = val.split(",");
+            int x = Integer.parseInt(pixelVal[0]);
+            int y = Integer.parseInt(pixelVal[1]);
+            int z = Integer.parseInt(pixelVal[2]);
+            pixelIntensityArray[w*y+x] = z;
+        }
+        return pixelIntensityArray;
     }
 
 
