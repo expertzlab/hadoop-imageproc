@@ -98,117 +98,121 @@ public class MRMean1Job {
             List<String> xyCoordinates = new ArrayList();
             int w = 1;
             int h = 1;
+            String[] xyzstrings = null;
             for (Text val : values) {
-                String[] strings = val.toString().split(";");
-                int x = Integer.parseInt(strings[0]);
-                int y = Integer.parseInt(strings[1]);
-                if(x > w){
-                    w = x;
-                }
-                if(y > h){
-                    h = y;
-                }
-                for(String str:strings) {
-                    xyCoordinates.add(str);
+                xyzstrings = val.toString().split(";");
+
+                for(String cordinates: xyzstrings) {
+
+                    String[] str = cordinates.split(",");
+                        int x = Integer.parseInt(str[0]);
+                        int y = Integer.parseInt(str[1]);
+                        if (x > w) {
+                            w = x;
+                        }
+                        if (y > h) {
+                            h = y;
+                        }
+                        System.out.printf("image width-%d,height-%d\n",w,h);
+                        xyCoordinates.add(cordinates);
                 }
             }
             System.out.println("BEGIN : Size of values in reduce : "+ xyCoordinates.size());
             System.out.println("seed key:"+key);
-            //mean of sum
-            float[] meanResults = getIntesityMeanOfSumAndDiff(xyCoordinates);
-            float m1 = meanResults[0];
-            float m2 = meanResults[1];
-            float[] sdResults = getIntensityDeviationsofSumAndDiff(meanResults, xyCoordinates);
-            float s1 = sdResults[0];
-            float s2 = sdResults[1];
 
-            reduceOnConnectedValue(key, xyCoordinates, context, seedPoint, m1, m2, s1, s2, w, h);
+            reduceOnConnectedValue(key, xyCoordinates, context, seedPoint, w, h);
 
         }
 
-        public static void reduceOnConnectedValue(Text seedKey, List<String> xyIntensityList, Reducer<Text, Text, Text, Text>.Context context, String[] seedPoint, float m1, float m2, float s1, float s2, int w, int h) throws IOException, InterruptedException {
+        public static void reduceOnConnectedValue(Text seedKey, List<String> xyIntensityList, Reducer<Text, Text, Text, Text>.Context context, String[] seedPoint, int w, int h) throws IOException, InterruptedException {
 
-            /*
-            HashMap<String,Integer> pixelValuesMap = new HashMap<>();
-            for (String val : xyIntensityList) {
-                String[] pixelVal = val.split(",");
-                String xyCoord = pixelVal[0]+","+pixelVal[1];
-                int pixelIntensity = Integer.parseInt(pixelVal[2]);
-                pixelValuesMap.put(xyCoord,pixelIntensity);
 
-            }
-            */
-
-            int[] pixelIntensityArray = convertToArray(xyIntensityList, w, h);
+            short[] pixelIntensityArray = convertToArray(xyIntensityList, w, h);
 
 
             int seedx = Integer.parseInt( seedPoint[0]);
             int seedy = Integer.parseInt( seedPoint[1]);
-            int pixelSizeTobeAnalyzed = xyIntensityList.size() - 1;
 
+            int[] seeds = new int[1];
+            seeds[0] = seedx + seedy * w;
 
+            float[] connectedValue = getConnectedValue(pixelIntensityArray, seeds,w,  h);
 
-
-            /*
-            String nextKey = seedKey.toString();
-            if(!pixelValuesMap.containsKey(nextKey)){
-                throw new IllegalArgumentException("The seed intensity not obtained because of x,y value");
+            for(int y=0; y < h; y++){
+                    for(int x=0; x < w; x++){
+                    String xy = ""+x+","+y+",";
+                    int position = x+(y==0?0:y-1)*h;
+                    //if(connectedValue[position] > 0.6) {
+                        context.write(new Text(xy), new Text("" + connectedValue[position]));
+                    //}
+                }
             }
-            int pixelCount = pixelValuesMap.size();
-            int count = pixelCount -1;
-            while(count > 0) {
-                count = count - 3;
-                if(pixelValuesMap.get(nextKey) == null){
-                    System.out.println("Next key returned :" +nextKey+", and the intensity is null and breaking");
-                    break;
-                }
-                context.write(new Text(nextKey+","), new Text( pixelValuesMap.get(nextKey).toString()));
-                System.out.println("Next key written: "+nextKey );
-                String previousSeed = nextKey;
-
-                String[] nextSeedPoint = nextKey.split(",");
-                seedx = Integer.parseInt( nextSeedPoint[0]);
-                seedy = Integer.parseInt( nextSeedPoint[1]);
-                nextKey = findNextPoint(seedx, seedy, previousSeed, pixelValuesMap, m1, m2, s1, s2);
-                pixelValuesMap.put(previousSeed,null);
-
-                while(nextKey.length() != 0  && pixelValuesMap.get(nextKey) == null && count > 0 ) {
-                    nextSeedPoint = nextKey.split(",");
-                    seedx = Integer.parseInt( nextSeedPoint[0]);
-                    seedy = Integer.parseInt( nextSeedPoint[1]);
-                    nextKey = findNextPoint(seedx, seedy, previousSeed, pixelValuesMap, m1, m2, s1, s2);
-                    System.out.println("In while - Next key which is null: "+nextKey );
-                    previousSeed = seedx+","+seedy;
-                }
-
-            } */
 
         }
 
-        private static void writeConnectedValueOfCombination(int r, int [][] pixelIntensityArray, int seedx, int seedy, int w, int h) {
+        private static float[] getConnectedValue(short[] m_imagePixels, int[] m_seeds, int w, int h) {
 
+            DialCache m_dial = new DialCache();
+            float m_threshold = 0.6f;
             int n = w * h;
+            float[] m_conScene = new float[n];
+            m_conScene[m_seeds[0]] = 1.0f;
+            float[] meanSigmaResults = new float[4];
+            calculateMeansAndSigmas(m_seeds, meanSigmaResults, m_imagePixels, w, h);
 
-            HashMap <HashSet,String> combinationSet = new HashMap<>(fact(n)/(fact(r)*fact(n-r)));
-            for(int i =0; i<n; i++){
-
+            //Push all seeds o to Q
+            for(int s : m_seeds)
+            {
+                m_dial.Push(s, DialCache.MaxIndex);
             }
+
+            while(m_dial.m_size > 0)
+            {
+                int c = m_dial.Pop();
+
+                int[] neighbors = getNeighbors(c,w ,h);
+                for(int e : neighbors)
+                {
+                    //We get -1 when we are at an edge (e.g. on first row and want the neighbor on the row below)
+                    if(e == -1)
+                        continue;
+
+                    float aff_c_e = affinity(c, e, meanSigmaResults, m_imagePixels);
+
+                    if(aff_c_e < m_threshold)
+                        continue;
+
+                    float f_min = Math.min(m_conScene[c], aff_c_e);
+                    if(f_min > m_conScene[e])
+                    {
+                        m_conScene[e] = f_min;
+
+                        if(m_dial.Contains(e))
+                            m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
+                        else
+                            m_dial.Push(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
+                    }
+                }
+            }
+
+            return m_conScene;
+
         }
 
-        private static void calculateMeansAndSigmas()
+        private static void calculateMeansAndSigmas(int[] m_seeds, float[] meanSigmaResults, short[] m_imagePixels, int w, int h)
         {
 
             //Will never add duplicates, since we use HashSets
             HashSet<Integer> spels = new HashSet<Integer>();
             for(int i : m_seeds)
             {
-                int[] neighbors = getNeighbors(i);
+                int[] neighbors = getNeighbors(i, w, h);
                 for(int j : neighbors)
                 {
                     if(j == -1)
                         continue;
 
-                    int[] neighborsNeighbors = getNeighbors(j);
+                    int[] neighborsNeighbors = getNeighbors(j, w, h);
 
                     for(int k : neighborsNeighbors)
                     {
@@ -238,8 +242,8 @@ public class MRMean1Job {
             {
                 for(int j = i+1; j < numSpels; j++)
                 {
-                    aves[count] = ave(spelsArray[i], spelsArray[j]);
-                    reldiffs[count] = reldiff(spelsArray[i], spelsArray[j]);
+                    aves[count] = ave(spelsArray[i], spelsArray[j], m_imagePixels);
+                    reldiffs[count] = reldiff(spelsArray[i], spelsArray[j],m_imagePixels);
 
                     count++;
                 }
@@ -248,22 +252,26 @@ public class MRMean1Job {
             float[] ave_meanSigma = welford(aves);
             float[] reldiff_meanSigma = welford(reldiffs);
 
-            m_mean_ave = ave_meanSigma[0];
-            m_sigma_ave = ave_meanSigma[1];
+            //m_mean_ave = ave_meanSigma[0];
+            meanSigmaResults[0] = ave_meanSigma[0];
+            //m_sigma_ave = ave_meanSigma[1];
+            meanSigmaResults[1] = ave_meanSigma[1];
 
-            m_mean_reldiff = reldiff_meanSigma[0];
-            m_sigma_reldiff = reldiff_meanSigma[1];
+            //m_mean_reldiff = reldiff_meanSigma[0];
+            meanSigmaResults[2] = reldiff_meanSigma[0];
+            //m_sigma_reldiff = reldiff_meanSigma[1];
+            meanSigmaResults[3] = reldiff_meanSigma[1];
 
-            System.out.println("ave mean: " + m_mean_ave);
-            System.out.println("ave sigma: " + m_sigma_ave);
-            System.out.println("reldiff mean: " + m_mean_reldiff);
-            System.out.println("reldiff sigma: " + m_sigma_reldiff);
+            System.out.println("ave mean: " + meanSigmaResults[0]);
+            System.out.println("ave sigma: " + meanSigmaResults[1]);
+            System.out.println("reldiff mean: " + meanSigmaResults[2]);
+            System.out.println("reldiff sigma: " + meanSigmaResults[3]);
         }
 
         /**
          * Single-pass average and standard deviation calculation
          * https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Online_algorithm
-         * @param elements list of elements to calculate the average and standard deviation of
+         * @param els list of elements to calculate the average and standard deviation of
          * @return length 2 float array with [average, standardDeviation]
          */
         private static float[] welford(float[] els)
@@ -290,7 +298,6 @@ public class MRMean1Job {
             float[] result = new float[2];
             result[0] = (float)mean;
             result[1] = (float)Math.sqrt(var);
-
             return result;
         }
 
@@ -299,20 +306,25 @@ public class MRMean1Job {
             return (float) Math.exp(-(1.0/(2*sigma*sigma)) * (val - avg) * (val - avg));
         }
 
-        private static float affinity(int c, int d)
+        private static float affinity(int c, int d, float[] meanSigmaResults, short[] m_imagePixels)
         {
-            float g_ave = gaussian(ave(c, d), m_mean_ave, m_sigma_ave);
-            float g_reldiff = gaussian(reldiff(c, d), m_mean_reldiff, m_sigma_reldiff);
+            float g_ave = gaussian(ave(c, d, m_imagePixels), meanSigmaResults[0], meanSigmaResults[1]);
+            float g_reldiff = gaussian(reldiff(c, d, m_imagePixels), meanSigmaResults[2], meanSigmaResults[3]);
+
+            //System.out.println("ave mean: " + meanSigmaResults[0]);
+            //System.out.println("ave sigma: " + meanSigmaResults[1]);
+            //System.out.println("reldiff mean: " + meanSigmaResults[2]);
+            //System.out.println("reldiff sigma: " + meanSigmaResults[3]);
 
             return Math.min(g_ave, g_reldiff);
         }
 
-        private static float ave(int c, int d)
+        private static float ave(int c, int d, short[] m_imagePixels)
         {
             return 0.5f * ((float)m_imagePixels[c] + (float)m_imagePixels[d]);
         }
 
-        private static float reldiff(int c, int d)
+        private static float reldiff(int c, int d, short[] m_imagePixels)
         {
             float fc = m_imagePixels[c];
             float fd = m_imagePixels[d];
@@ -320,7 +332,7 @@ public class MRMean1Job {
             return fc == -fd ? 0 : (Math.abs(fc - fd)) / (fc + fd);
         }
 
-        private static int[] getNeighbors(int c,int w, int h)
+        private static int[] getNeighbors(int c, int w, int h)
         {
             int m_width = w;
             int m_height = h;
@@ -343,181 +355,21 @@ public class MRMean1Job {
         }
 
 
-        private static int fact(int n){
-            return n * fact(n-1);
-        }
+        public static short[]convertToArray(List<String> xyIntensityList, int w, int h) {
 
-        private static String findNextPoint(int seedx, int seedy, String previousSeed, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
-
-            String seedkey = ""+seedx+","+seedy;
-            System.out.println("New seed key :"+ seedkey);
-
-            float connectedValueTemp = 0;
-            float connectedValueMin = 0.6f;
-            String nextKey = "";
-
-            String xyl = ""+(seedx-1)+","+(seedy);
-            System.out.println("Trying on xyl:"+xyl+",intensity:"+pixelValuesMap.get(xyl));
-            if(pixelValuesMap.get(xyl)!= null && !xyl.equals(previousSeed)) {
-                nextKey = xyl;
-                connectedValueMin = calcConnectedValueTo(seedkey, xyl, pixelValuesMap, m1, m2, s1, s2);
-                System.out.println("xyl:"+xyl+", connected value :"+ connectedValueMin);
+            short[] pixelIntensityArray = new short[w * h+100];
+            for (String val : xyIntensityList) {
+                String[] pixelVal = val.split(",");
+                short x = Short.parseShort(pixelVal[0]);
+                short y = Short.parseShort(pixelVal[1]);
+                short z = Short.parseShort(pixelVal[2]);
+                System.out.printf("x=%d,y=%d,z=%d\n",x,y,z);
+                pixelIntensityArray[w*(y==0?0:y-1)+x] = z;
             }
-
-            String xyr = ""+(seedx+1)+","+(seedy);
-            System.out.println("Trying on xyr:"+xyr+",intensity:"+pixelValuesMap.get(xyr));
-            if(pixelValuesMap.get(xyr)!= null && !xyl.equals(previousSeed) ) {
-                connectedValueTemp = calcConnectedValueTo(seedkey, xyr, pixelValuesMap, m1, m2, s1, s2);
-                System.out.println("xyr:"+xyr+", connected value :"+ connectedValueTemp);
-                if (connectedValueTemp < connectedValueMin) {
-                    nextKey = xyr;
-                    connectedValueMin = connectedValueTemp;
-                } else{
-                    pixelValuesMap.put(xyr, null);
-                }
-            }
-
-
-            String xyu = ""+(seedx)+","+(seedy-1);
-            System.out.println("Trying on xyu: "+xyu+",intensity:"+pixelValuesMap.get(xyu));
-            if(pixelValuesMap.get(xyu)!= null && !xyl.equals(previousSeed)) {
-                connectedValueTemp = calcConnectedValueTo(seedkey, xyu, pixelValuesMap, m1, m2, s1, s2);
-                System.out.println("xyu : "+xyu+", connected value :"+ connectedValueTemp);
-                if(connectedValueTemp < connectedValueMin){
-                    nextKey = xyu;
-                    connectedValueMin = connectedValueTemp;
-                }else{
-                    pixelValuesMap.put(xyu, null);
-                }
-            }
-
-            String xyd = ""+(seedx)+","+(seedy+1);
-            System.out.println("Trying on xyd:"+xyd+",intensity:"+pixelValuesMap.get(xyd));
-            if(pixelValuesMap.get(xyd)!= null && !xyl.equals(previousSeed)) {
-                connectedValueTemp = calcConnectedValueTo(seedkey, xyd, pixelValuesMap, m1, m2, s1, s2);
-                System.out.println("xyd:"+xyd+", connected value :"+ connectedValueTemp);
-                if (connectedValueTemp < connectedValueMin) {
-                    nextKey = xyd;
-                } else {
-                    pixelValuesMap.put(xyd, null);
-                }
-            }
-
-            if(!nextKey.equals(xyl)){
-                pixelValuesMap.put(xyl, null);
-            }
-            return nextKey;
-        }
-
-        public static float calcConnectedValueTo(String seedkey, String xy, Map pixelValuesMap, float m1, float m2, float s1, float s2) throws IOException, InterruptedException {
-
-           int seedIntensity = (int) pixelValuesMap.get(seedkey);
-            int pixelIntensity = (int) pixelValuesMap.get(xy);
-            /*
-            System.out.println("SeedIntensity = "+ seedIntensity+ ", pixelIntensity ="+pixelIntensity);
-            System.out.printf("m1=%f,m2=%f,s1=%f,s2=%f\n",m1,m2,s1,s2);
-            double g1 = Math.exp(Math.pow((((0.5*(seedIntensity + pixelIntensity))- m1)/s1),2)/2);
-            double g2 = Math.exp(Math.pow((((0.5*(seedIntensity - pixelIntensity))- m2)/s2),2)/2);
-            //float w1 = (float) (g1 / (g1+g2));
-            //float w2 = 1 - w1;
-            float w1 = 0.5f;
-            float w2 = 0.5f;
-            float mu = (float) (w1 * g1 + w2 * g2);
-            return mu;
-            */
-
-            double term1 = 0.5*(seedIntensity + pixelIntensity);
-            System.out.println("Term 1 ="+ term1);
-            double term2 =  ((term1- m1)/(2*s1));
-            System.out.println("Term 2 ="+ term2);
-            double term3 = - Math.pow(term2,2);
-            System.out.println("Term 3 ="+ term3);
-            double g1 = Math.exp(term3);
-            System.out.println("g1 ="+ g1);
-
-            double termA = 0.5*(seedIntensity - pixelIntensity);
-            System.out.println("Term A ="+ termA);
-            double termB =  ((termA- m1)/(2*s1));
-            System.out.println("Term B ="+ termB);
-            double termC = - Math.pow(termB,2);
-            System.out.println("Term C ="+ termC);
-            double g2 = Math.exp(termC);
-            System.out.println("g2 ="+ g2);
-
-            //float w1 = (float) (g1 / (g1+g2));
-            //float w2 = 1 - w1;
-            float w1 = 0.5f;
-            float w2 = 0.5f;
-            float mu = (float) (w1 * g1 + w2 * g2);
-            System.out.println("MU =" + mu);
-            return mu;
-
-        }
-
-
-        private float[] getIntensityDeviationsofSumAndDiff(float[] meanResults, List<String> xyIntensityValues) {
-
-            int size = xyIntensityValues.size();
-            float m1 = meanResults[0];
-            float m2 = meanResults[1];
-
-            int deviationSum1 = 0;
-            int deviationSum2 = 0;
-
-            float[] sd = new float[2];
-
-            for (String str : xyIntensityValues) {
-                String[] pixelVal = str.split(",");
-                int pixelIntensity = Integer.parseInt(pixelVal[2]);
-                //System.out.println("pixel intensity-"+pixelIntensity);
-                deviationSum1 = (int)(deviationSum1 +  Math.pow((pixelIntensity - m1),2) );
-                deviationSum2 = (int)(deviationSum2 +  Math.pow((pixelIntensity - m2),2) );
-            }
-            sd[0] = (float) Math.sqrt(deviationSum1/size);
-            sd[1] = (float) Math.sqrt(deviationSum2/size);
-            return sd;
-        }
-
-
-        private static float[] getIntesityMeanOfSumAndDiff(List<String> xyIntensityValues){
-
-            int size = 1;
-            long preMeanSumofIntensitySum = 0;
-            long preMeanSumofIntensityDiff = 0;
-            float[] results = new float[2];
-            for (String str: xyIntensityValues) {
-                size ++;
-                String[] pixelVal = str.split(",");
-                int pixelIntensity = Integer.parseInt(pixelVal[2]);
-                int seedIntensity = Integer.parseInt(pixelVal[3]);
-                preMeanSumofIntensitySum += (0.5 *(seedIntensity + pixelIntensity));
-                preMeanSumofIntensityDiff += (0.5 *(seedIntensity - pixelIntensity));
-            }
-            //System.out.println("Size of values in reduce - "+ size);
-            results[0] = (preMeanSumofIntensitySum / size);
-            results[1] =  (preMeanSumofIntensityDiff / size);
-            return results;
+            return pixelIntensityArray;
         }
 
     }
 
-    public static int[]convertToArray(List<String> xyIntensityList, int w, int h) {
-        int[] pixelIntensityArray = new int[w * h];
-        for (String val : xyIntensityList) {
-            String[] pixelVal = val.split(",");
-            int x = Integer.parseInt(pixelVal[0]);
-            int y = Integer.parseInt(pixelVal[1]);
-            int z = Integer.parseInt(pixelVal[2]);
-            pixelIntensityArray[w*y+x] = z;
-        }
-        return pixelIntensityArray;
-    }
-
-
-    private static String[] parseSeedString(String seedStr){
-
-        return seedStr.split(";");
-
-    }
 
 }
