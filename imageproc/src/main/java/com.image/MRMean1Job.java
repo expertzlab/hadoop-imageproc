@@ -57,19 +57,16 @@ public class MRMean1Job {
 
         public static void writeOutPixelsForEachSeedPoint(Mapper<LongWritable, Text, Text, Text>.Context context, String[] splitEachLineRecArray) throws IOException, InterruptedException {
 
-            String[] seedPointsArray = ("83,137,142;" +
-                    "70,130,89;" +
-                    "56,121,114;" +
-                    "71,109,108;" +
-                    "86,96,51;" +
-                    "106,84,100;" +
-                    "121,79,41;" +
-                    "117,92,159;" +
-                    "104,106,182;" +
-                    "95,116,113;" +
-                    "89,126,141;" +
-                    "81,135,20;" +
-                    "72,127,155").split(";");
+            String[] seedPointsArray = ("222,143,17;"+
+            "223,119,36;"+
+            "228,92,53;"+
+            "242,63,49;"+
+            "258,47,27;"+
+            "280,34,84;"+
+            "308,30,14;"+
+            "329,83,30;"+
+            "322,110,30;"+
+            "310,134,11;").split(";");
 
             String x = splitEachLineRecArray[0];
             String y = splitEachLineRecArray[1];
@@ -152,7 +149,7 @@ public class MRMean1Job {
 
         private static float[] getConnectedValue(short[] m_imagePixels, int[] m_seeds, int w, int h) {
 
-            DialCache m_dial = new DialCache();
+            Stack m_dial = new Stack();
             float m_threshold = 0.6f;
             int n = w * h;
             float[] m_conScene = new float[n];
@@ -163,12 +160,12 @@ public class MRMean1Job {
             //Push all seeds o to Q
             for(int s : m_seeds)
             {
-                m_dial.Push(s, DialCache.MaxIndex);
+                m_dial.push(s);
             }
 
-            while(m_dial.m_size > 0)
+            while(m_dial.size() > 0)
             {
-                int c = m_dial.Pop();
+                int c = (int) m_dial.pop();
 
                 int[] neighbors = getNeighbors(c,w ,h);
                 for(int e : neighbors)
@@ -186,11 +183,7 @@ public class MRMean1Job {
                     if(f_min > m_conScene[e])
                     {
                         m_conScene[e] = f_min;
-
-                        if(m_dial.Contains(e))
-                            m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
-                        else
-                            m_dial.Push(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
+                        m_dial.push(e);
                     }
                 }
             }
