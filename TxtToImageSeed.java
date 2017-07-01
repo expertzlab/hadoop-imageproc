@@ -94,7 +94,7 @@ class MainCanvasImage1 extends Canvas implements MouseListener
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX() + "," + e.getY());
         val=wr.getSample(e.getX(),e.getY(),0);
-        writer.println(e.getX()+","+e.getY()+","+val);
+        writer.println("\""+e.getX()+","+e.getY()+","+val+";\"");
 
     }
     public void mouseEntered(MouseEvent e) {

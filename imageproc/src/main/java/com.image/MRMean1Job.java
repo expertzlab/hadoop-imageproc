@@ -57,19 +57,75 @@ public class MRMean1Job {
 
         public static void writeOutPixelsForEachSeedPoint(Mapper<LongWritable, Text, Text, Text>.Context context, String[] splitEachLineRecArray) throws IOException, InterruptedException {
 
-            String[] seedPointsArray = ("83,137,142;" +
-                    "70,130,89;" +
-                    "56,121,114;" +
-                    "71,109,108;" +
-                    "86,96,51;" +
-                    "106,84,100;" +
-                    "121,79,41;" +
-                    "117,92,159;" +
-                    "104,106,182;" +
-                    "95,116,113;" +
-                    "89,126,141;" +
-                    "81,135,20;" +
-                    "72,127,155").split(";");
+            String seedString = "8,190,97;"+
+            "23,186,96;"+
+            "42,177,140;"+
+            "61,174,152;"+
+            "71,165,120;"+
+            "74,126,111;"+
+            "77,101,53;"+
+            "84,67,84;"+
+            "88,28,101;"+
+            "90,12,77;"+
+            "86,94,31;"+
+            "83,124,44;"+
+            "84,146,49;"+
+            "92,165,33;"+
+            "111,165,69;"+
+            "148,166,54;"+
+            "177,165,41;"+
+            "205,163,83;"+
+            "218,158,58;"+
+            "229,110,33;"+
+            "238,66,60;"+
+            "248,52,45;"+
+            "246,94,14;"+
+            "254,69,31;"+
+            "256,52,29;"+
+            "268,43,72;"+
+            "287,34,55;"+
+            "293,23,50;"+
+            "307,26,32;"+
+            "316,39,11;"+
+            "302,53,7;"+
+            "319,55,42;"+
+            "331,90,23;"+
+            "324,112,78;"+
+            "314,123,28;"+
+            "310,139,49;"+
+            "306,124,20;"+
+            "305,104,32;"+
+            "313,83,40;"+
+            "307,71,48;"+
+            "294,86,68;"+
+            "288,111,35;"+
+            "286,125,48;"+
+            "285,137,27;"+
+            "294,155,20;"+
+            "308,160,89;"+
+            "331,195,90;"+
+            "320,200,121;"+
+            "302,166,29;"+
+            "285,164,25;"+
+            "255,164,22;"+
+            "266,178,20;"+
+            "263,192,23;"+
+            "245,192,39;"+
+            "243,178,27;"+
+            "243,166,43;"+
+            "224,162,70;"+
+            "209,166,39;"+
+            "181,166,39;"+
+            "159,167,35;"+
+            "132,171,16;"+
+            "105,175,19;"+
+            "83,182,49;"+
+            "63,192,35;"+
+            "37,201,48;"+
+            "16,208,14;"+
+            "4,212,12;"+
+            "9,198,56";
+            String[] seedPointsArray = seedString.split(";");
 
             String x = splitEachLineRecArray[0];
             String y = splitEachLineRecArray[1];
@@ -140,21 +196,19 @@ public class MRMean1Job {
             int[] seeds = new int[1];
             seeds[0] = seedx + seedy * w;
 
-            float[] connectedValue = getConnectedValue(pixelIntensityArray, seeds,w,  h);
+            float[] connectedScene = getConnectedScene(pixelIntensityArray, seeds,w,  h);
 
             for(int y=0; y < h; y++){
                     for(int x=0; x < w; x++){
                     String xy = ""+x+","+y+",";
                     int position = x+(y==0?0:y-1)*h;
-                    //if(connectedValue[position] > 0.6) {
-                        context.write(new Text(xy), new Text("" + connectedValue[position]));
-                    //}
+                        context.write(new Text(xy), new Text("" + connectedScene[position]));
                 }
             }
 
         }
 
-        private static float[] getConnectedValue(short[] m_imagePixels, int[] m_seeds, int w, int h) {
+        private static float[] getConnectedScene(short[] m_imagePixels, int[] m_seeds, int w, int h) {
 
             DialCache m_dial = new DialCache();
             float m_threshold = 0.6f;
@@ -185,7 +239,6 @@ public class MRMean1Job {
                     if(f_min > m_conScene[e])
                     {
                         m_conScene[e] = f_min;
-                        m_dial.Push(e, DialCache.MaxIndex);
 
                         if(m_dial.Contains(e))
                             m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
