@@ -92,21 +92,25 @@ public class MRMean1Job {
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 
             String[] seedPoint = key.toString().split(",");
-            int seedx = Integer.parseInt(seedPoint[0]);
-            int seedy = Integer.parseInt(seedPoint[1]);
+            //int seedx = Integer.parseInt(seedPoint[0]);
+            //int seedy = Integer.parseInt(seedPoint[1]);
 
             List<String> xyCoordinates = new ArrayList();
             int w = 1;
             int h = 1;
+            int seedIntensity = -1;
             String[] xyzstrings = null;
             for (Text val : values) {
                 xyzstrings = val.toString().split(";");
 
-                for(String cordinates: xyzstrings) {
+                for(String coordinates: xyzstrings) {
 
-                    String[] str = cordinates.split(",");
+                    String[] str = coordinates.split(",");
                         int x = Integer.parseInt(str[0]);
                         int y = Integer.parseInt(str[1]);
+                        if(seedIntensity == -1) {
+                            seedIntensity = Integer.parseInt(str[3]);
+                        }
                         if (x > w) {
                             w = x;
                         }
@@ -114,7 +118,7 @@ public class MRMean1Job {
                             h = y;
                         }
                         System.out.printf("image width-%d,height-%d\n",w,h);
-                        xyCoordinates.add(cordinates);
+                        xyCoordinates.add(coordinates);
                 }
             }
             System.out.println("BEGIN : Size of values in reduce : "+ xyCoordinates.size());
@@ -157,18 +161,13 @@ public class MRMean1Job {
             int n = w * h;
             float[] m_conScene = new float[n];
             m_conScene[m_seeds[0]] = 1.0f;
-            float[] meanSigmaResults = new float[4];
-            calculateMeansAndSigmas(m_seeds, meanSigmaResults, m_imagePixels, w, h);
-
-            //Push all seeds o to Q
-            for(int s : m_seeds)
-            {
-                m_dial.Push(s, DialCache.MaxIndex);
-            }
-
-            while(m_dial.m_size > 0)
+            m_dial.Push(m_seeds[0], DialCache.MaxIndex);
+              while(m_dial.m_size > 0)
             {
                 int c = m_dial.Pop();
+
+                float[] meanSigmaResults = new float[4];
+                calculateMeansAndSigmas(c, meanSigmaResults, m_imagePixels, w, h);
 
                 int[] neighbors = getNeighbors(c,w ,h);
                 for(int e : neighbors)
@@ -186,6 +185,7 @@ public class MRMean1Job {
                     if(f_min > m_conScene[e])
                     {
                         m_conScene[e] = f_min;
+                        m_dial.Push(e, DialCache.MaxIndex);
 
                         if(m_dial.Contains(e))
                             m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
@@ -199,14 +199,13 @@ public class MRMean1Job {
 
         }
 
-        private static void calculateMeansAndSigmas(int[] m_seeds, float[] meanSigmaResults, short[] m_imagePixels, int w, int h)
+        private static void calculateMeansAndSigmas(int c, float[] meanSigmaResults, short[] m_imagePixels, int w, int h)
         {
 
             //Will never add duplicates, since we use HashSets
             HashSet<Integer> spels = new HashSet<Integer>();
-            for(int i : m_seeds)
-            {
-                int[] neighbors = getNeighbors(i, w, h);
+
+                int[] neighbors = getNeighbors(c, w, h);
                 for(int j : neighbors)
                 {
                     if(j == -1)
@@ -222,7 +221,6 @@ public class MRMean1Job {
                         spels.add(k);
                     }
                 }
-            }
 
             //Push all combinations of ave and reldiff to the arrays
             int numSpels = spels.size();
