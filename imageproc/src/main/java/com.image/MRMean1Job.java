@@ -142,9 +142,9 @@ public class MRMean1Job {
                     for(int x=0; x < w; x++){
                     String xy = ""+x+","+y+",";
                     int position = x+(y==0?0:y-1)*h;
-                    //if(connectedValue[position] > 0.6) {
-                        context.write(new Text(xy), new Text("" + connectedValue[position]));
-                    //}
+                    if(connectedValue[position] > 0.6) {
+                        context.write(new Text(xy), new Text("" + pixelIntensityArray[position]));
+                    }
                 }
             }
 
