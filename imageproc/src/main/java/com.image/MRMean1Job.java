@@ -57,74 +57,12 @@ public class MRMean1Job {
 
         public static void writeOutPixelsForEachSeedPoint(Mapper<LongWritable, Text, Text, Text>.Context context, String[] splitEachLineRecArray) throws IOException, InterruptedException {
 
-            String seedString = "8,190,97;"+
-            "23,186,96;"+
-            "42,177,140;"+
-            "61,174,152;"+
-            "71,165,120;"+
-            "74,126,111;"+
-            "77,101,53;"+
-            "84,67,84;"+
-            "88,28,101;"+
-            "90,12,77;"+
-            "86,94,31;"+
-            "83,124,44;"+
-            "84,146,49;"+
-            "92,165,33;"+
-            "111,165,69;"+
-            "148,166,54;"+
-            "177,165,41;"+
-            "205,163,83;"+
-            "218,158,58;"+
-            "229,110,33;"+
-            "238,66,60;"+
-            "248,52,45;"+
-            "246,94,14;"+
-            "254,69,31;"+
-            "256,52,29;"+
-            "268,43,72;"+
-            "287,34,55;"+
-            "293,23,50;"+
-            "307,26,32;"+
-            "316,39,11;"+
-            "302,53,7;"+
-            "319,55,42;"+
-            "331,90,23;"+
-            "324,112,78;"+
-            "314,123,28;"+
-            "310,139,49;"+
-            "306,124,20;"+
-            "305,104,32;"+
-            "313,83,40;"+
-            "307,71,48;"+
-            "294,86,68;"+
-            "288,111,35;"+
-            "286,125,48;"+
-            "285,137,27;"+
-            "294,155,20;"+
-            "308,160,89;"+
-            "331,195,90;"+
-            "320,200,121;"+
-            "302,166,29;"+
-            "285,164,25;"+
-            "255,164,22;"+
-            "266,178,20;"+
-            "263,192,23;"+
-            "245,192,39;"+
-            "243,178,27;"+
-            "243,166,43;"+
-            "224,162,70;"+
-            "209,166,39;"+
-            "181,166,39;"+
-            "159,167,35;"+
-            "132,171,16;"+
-            "105,175,19;"+
-            "83,182,49;"+
-            "63,192,35;"+
-            "37,201,48;"+
-            "16,208,14;"+
-            "4,212,12;"+
-            "9,198,56";
+            String seedString = "229,122,29;"+
+            "241,92,25;"+
+            "249,65,15;"+
+            "285,43,44;"+
+            "324,67,29;"+
+            "314,113,24;";
             String[] seedPointsArray = seedString.split(";");
 
             String x = splitEachLineRecArray[0];
@@ -196,19 +134,23 @@ public class MRMean1Job {
             int[] seeds = new int[1];
             seeds[0] = seedx + seedy * w;
 
-            float[] connectedScene = getConnectedScene(pixelIntensityArray, seeds,w,  h);
+            printScenePoints(pixelIntensityArray, seeds,w,  h, context);
 
+            /*
             for(int y=0; y < h; y++){
                     for(int x=0; x < w; x++){
                     String xy = ""+x+","+y+",";
                     int position = x+(y==0?0:y-1)*h;
-                        context.write(new Text(xy), new Text("" + connectedScene[position]));
+                    if(connectedScene[position]> 0.6) {
+                        context.write(new Text(xy), new Text("" + pixelIntensityArray[position]));
+                    }
                 }
             }
+            */
 
         }
 
-        private static float[] getConnectedScene(short[] m_imagePixels, int[] m_seeds, int w, int h) {
+        private static float[] printScenePoints(short[] m_imagePixels, int[] m_seeds, int w, int h, Reducer<Text, Text, Text, Text>.Context context) throws IOException, InterruptedException {
 
             DialCache m_dial = new DialCache();
             float m_threshold = 0.6f;
@@ -216,20 +158,24 @@ public class MRMean1Job {
             float[] m_conScene = new float[n];
             m_conScene[m_seeds[0]] = 1.0f;
             m_dial.Push(m_seeds[0], DialCache.MaxIndex);
-              while(m_dial.m_size > 0)
+
+            System.out.println("First Seed at -"+ (m_seeds[0]%w)+","+(m_seeds[0]/w));
+            while(m_dial.m_size > 0)
             {
                 int c = m_dial.Pop();
-
+                context.write(new Text((c%w)+","+(c/w)), new Text("," + m_imagePixels[c]));
                 float[] meanSigmaResults = new float[4];
                 calculateMeansAndSigmas(c, meanSigmaResults, m_imagePixels, w, h);
 
                 int[] neighbors = getNeighbors(c,w ,h);
                 for(int e : neighbors)
                 {
+
                     //We get -1 when we are at an edge (e.g. on first row and want the neighbor on the row below)
                     if(e == -1)
                         continue;
 
+                    System.out.println("selected neighbouring seed at -"+ (e%w)+","+(e/w));
                     float aff_c_e = affinity(c, e, meanSigmaResults, m_imagePixels);
 
                     if(aff_c_e < m_threshold)
@@ -244,6 +190,8 @@ public class MRMean1Job {
                             m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
                         else
                             m_dial.Push(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
+                        System.out.println("pushed -"+ (e%w)+","+(e/w));
+
                     }
                 }
             }

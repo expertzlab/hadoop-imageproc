@@ -36,8 +36,8 @@ class TxtToImageSeed  {
                 array  = line.split(",");
 
 
-                    x1 = Integer.parseInt(array[0]);
-                    y1 = Integer.parseInt(array[1]);
+                    x1 = Integer.parseInt(array[0].trim());
+                    y1 = Integer.parseInt(array[1].trim());
                     val[0] = Integer.parseInt(array[2].trim());
                     wr.setPixel(x1, y1, val);
 
@@ -94,7 +94,7 @@ class MainCanvasImage1 extends Canvas implements MouseListener
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX() + "," + e.getY());
         val=wr.getSample(e.getX(),e.getY(),0);
-        writer.println("\""+e.getX()+","+e.getY()+","+val+";\"");
+        writer.println(e.getX()+","+e.getY()+","+val);
 
     }
     public void mouseEntered(MouseEvent e) {
@@ -102,7 +102,7 @@ class MainCanvasImage1 extends Canvas implements MouseListener
     }
     public void mouseExited(MouseEvent e) {
         writer.close();
-
+		System.out.println("File closed");
     }
     public void mousePressed(MouseEvent e) {
 

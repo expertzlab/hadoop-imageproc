@@ -26,8 +26,8 @@ class TxtToImage {
                 array  = line.split(",");
 
 
-                    x1 = Integer.parseInt(array[0]);
-                    y1 = Integer.parseInt(array[1]);
+                    x1 = Integer.parseInt(array[0].trim());
+                    y1 = Integer.parseInt(array[1].trim());
                     val[0] = Integer.parseInt(array[2].trim());
                     wr.setPixel(x1, y1, val);
 
