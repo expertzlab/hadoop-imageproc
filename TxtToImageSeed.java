@@ -28,7 +28,7 @@ class TxtToImageSeed  {
 			for(int i=0; i < X; i++){
 				for(int j=0; j <Y; j++){
 					wr.setPixel(i,j,whitePixel);
-					System.out.println("whitePixel:"+whitePixel[0]);
+					//System.out.println("whitePixel:"+whitePixel[0]);
 				}
 			}
 

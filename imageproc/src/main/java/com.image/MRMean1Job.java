@@ -57,12 +57,18 @@ public class MRMean1Job {
 
         public static void writeOutPixelsForEachSeedPoint(Mapper<LongWritable, Text, Text, Text>.Context context, String[] splitEachLineRecArray) throws IOException, InterruptedException {
 
-            String seedString = "229,122,29";
-            //"241,92,25;"+
-            //"249,65,15;"+
-            //"285,43,44;"+
-            //"324,67,29;"+
-            //"314,113,24;";
+            String seedString = "93,145,40;"+
+            "81,160,45;"+
+            "74,169,44;"+
+            "82,185,33;"+
+            "79,205,51;"+
+            "78,217,33;"+
+            "91,205,93;"+
+            "98,182,71;"+
+            "98,168,65;"+
+            "96,152,83;"+
+            "95,138,99";
+
             String[] seedPointsArray = seedString.split(";");
 
             String x = splitEachLineRecArray[0];
@@ -153,19 +159,21 @@ public class MRMean1Job {
         private static float[] printScenePoints(short[] m_imagePixels, int[] m_seeds, int w, int h, Reducer<Text, Text, Text, Text>.Context context) throws IOException, InterruptedException {
 
             DialCache m_dial = new DialCache();
-            float m_threshold = 0.6f;
+            float m_threshold = 0.4f;
             int n = w * h;
             float[] m_conScene = new float[n];
             m_conScene[m_seeds[0]] = 1.0f;
             m_dial.Push(m_seeds[0], DialCache.MaxIndex);
 
             System.out.println("First Seed at -"+ (m_seeds[0]%w)+","+(m_seeds[0]/w));
+            float[] meanSigmaResults = new float[4];
+            calculateMeansAndSigmas(m_seeds[0], meanSigmaResults, m_imagePixels, w, h);
+
             while(m_dial.m_size > 0)
             {
                 int c = m_dial.Pop();
+                System.out.println("poped new seed:"+ (c%w)+","+(c/w)+", intensity: "+m_imagePixels[c]);
                 context.write(new Text((c%w)+","+(c/w)), new Text("," + m_imagePixels[c]));
-                float[] meanSigmaResults = new float[4];
-                calculateMeansAndSigmas(c, meanSigmaResults, m_imagePixels, w, h);
 
                 int[] neighbors = getNeighbors(c,w ,h);
                 for(int e : neighbors)
@@ -183,6 +191,7 @@ public class MRMean1Job {
                         continue;
 
                     float f_min = Math.min(m_conScene[c], aff_c_e);
+                    System.out.printf("Minimum:%f of %f and %f(m[c],affabove),%f (m[e])\n",f_min,m_conScene[c],aff_c_e,m_conScene[e]);
                     if(f_min > m_conScene[e])
                     {
                         m_conScene[e] = f_min;
@@ -190,7 +199,7 @@ public class MRMean1Job {
                         if(m_dial.Contains(e))
                             m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
                         else
-                            m_dial.Push(e, (int)(DialCache.MaxIndex));
+                            m_dial.Push(e, (int)(DialCache.MaxIndex  * f_min + 0.5f));
                         System.out.println("connectedness value: "+f_min);
                         System.out.println("pushed -"+ (e%w)+","+(e/w));
 
