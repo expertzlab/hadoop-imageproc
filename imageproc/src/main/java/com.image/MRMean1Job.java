@@ -111,7 +111,7 @@ public class MRMean1Job {
                         if (y > h) {
                             h = y;
                         }
-                        System.out.printf("image width-%d,height-%d\n",w,h);
+                        //System.out.printf("image width-%d,height-%d\n",w,h);
                         xyCoordinates.add(coordinates);
                 }
             }
@@ -177,6 +177,7 @@ public class MRMean1Job {
 
                     System.out.println("selected neighbouring points at -"+ (e%w)+","+(e/w));
                     float aff_c_e = affinity(c, e, meanSigmaResults, m_imagePixels);
+                    System.out.println("Connectedness value:"+aff_c_e);
 
                     if(aff_c_e < m_threshold)
                         continue;
@@ -363,7 +364,7 @@ public class MRMean1Job {
                 short x = Short.parseShort(pixelVal[0]);
                 short y = Short.parseShort(pixelVal[1]);
                 short z = Short.parseShort(pixelVal[2]);
-                System.out.printf("x=%d,y=%d,z=%d\n",x,y,z);
+                //System.out.printf("x=%d,y=%d,z=%d\n",x,y,z);
                 pixelIntensityArray[w*(y==0?0:y-1)+x] = z;
             }
             return pixelIntensityArray;
