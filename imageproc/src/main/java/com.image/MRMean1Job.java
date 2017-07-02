@@ -57,12 +57,12 @@ public class MRMean1Job {
 
         public static void writeOutPixelsForEachSeedPoint(Mapper<LongWritable, Text, Text, Text>.Context context, String[] splitEachLineRecArray) throws IOException, InterruptedException {
 
-            String seedString = "229,122,29;"+
-            "241,92,25;"+
-            "249,65,15;"+
-            "285,43,44;"+
-            "324,67,29;"+
-            "314,113,24;";
+            String seedString = "229,122,29";
+            //"241,92,25;"+
+            //"249,65,15;"+
+            //"285,43,44;"+
+            //"324,67,29;"+
+            //"314,113,24;";
             String[] seedPointsArray = seedString.split(";");
 
             String x = splitEachLineRecArray[0];
@@ -175,7 +175,7 @@ public class MRMean1Job {
                     if(e == -1)
                         continue;
 
-                    System.out.println("selected neighbouring seed at -"+ (e%w)+","+(e/w));
+                    System.out.println("selected neighbouring points at -"+ (e%w)+","+(e/w));
                     float aff_c_e = affinity(c, e, meanSigmaResults, m_imagePixels);
 
                     if(aff_c_e < m_threshold)
@@ -189,7 +189,8 @@ public class MRMean1Job {
                         if(m_dial.Contains(e))
                             m_dial.Update(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
                         else
-                            m_dial.Push(e, (int)(DialCache.MaxIndex * f_min + 0.5f));
+                            m_dial.Push(e, (int)(DialCache.MaxIndex));
+                        System.out.println("connectedness value: "+f_min);
                         System.out.println("pushed -"+ (e%w)+","+(e/w));
 
                     }
